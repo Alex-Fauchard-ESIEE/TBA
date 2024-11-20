@@ -27,8 +27,8 @@ class Room:
     >>> castle = Room("Castle", "dans un énorme château fort avec des douves et un pont levis. Sur les tours, des flèches en or massif.")
     >>> forest = Room("Forest", "dans une forêt enchantée. Vous entendez une brise légère à travers la cime des arbres.")
     >>> tower = Room("Tower", "dans une immense tour en pierre qui s'élève au dessus des nuages.")
-    >>> forest.exits = {"N" : cave, "E" : tower, "S" : castle, "O" : None}
-    >>> tower.exits = {"N" : cottage, "E" : None, "S" : swamp, "O" : forest}
+    >>> forest.exits = {"N" : cave, "E" : None, "S" : castle, "O" : None}
+    >>> tower.exits = {"N" : cottage, "E" : None, "S" : swamp, "O" : None}
     >>> forest.name
     'Forest'
     >>> tower.name
@@ -42,7 +42,7 @@ class Room:
     >>> tower.get_exit("E")
     
     >>> forest.get_exit_string()
-    'Sorties: N, E, S'
+    'Sorties: N, S'
     """
     # Define the constructor. 
     def __init__(self, name, description):
