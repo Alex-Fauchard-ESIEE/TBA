@@ -1,6 +1,32 @@
 # Define the Player class.
 class Player():
+    """
+    Cette classe permet au joeur de bouger et de révéler sa position
 
+    attribut 1 : self.name
+    attribut 2 : self.current_name
+
+    __init__ : définie le constructeur
+    move () : donne le procéder pour changer de room
+
+    une liste des exceptions levées par la classe (optionnel) ;
+
+    Doctests :
+    >>> Patrick = Player('Patrick')
+    >>> from room import Room
+    >>> swamp = Room("Swamp", "dans un marécage sombre et ténébreux. L'eau bouillonne, les abords sont vaseux.")
+    >>> forest = Room("Forest", "dans une forêt enchantée. Vous entendez une brise légère à travers la cime des arbres.")
+    >>> castle = Room("Castle", "dans un énorme château fort avec des douves et un pont levis. Sur les tours, des flèches en or massif.")
+    >>> Patrick.name
+    'Patrick'
+    >>> Patrick.current_room = castle
+    >>> castle.exits = {"N" : forest, "E" : swamp, "S" : None, "O" : None}
+    >>> Patrick.move("N")
+    Vous êtes dans un énorme château fort avec des douves et un pont levis. Sur les tours, des flèches en or massif.
+    
+    Sorties: N, E
+
+    """
     # Define the constructor.
     def __init__(self, name):
         self.name = name
