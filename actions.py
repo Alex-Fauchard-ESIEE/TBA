@@ -18,6 +18,20 @@ MSG1 = "\nLa commande '{command_word}' prend 1 seul paramètre.\n"
 
 class Actions:
 
+#------------------------------------
+# Prise en compte de la commande vide
+
+    def nothing(game, list_of_words, number_of_parameters):
+        player = game.player
+        l = len(list_of_words)
+        if l != number_of_parameters + 1:
+            command_word = list_of_words[0]
+            print(MSG0.format(command_word=command_word))
+            return False
+        return None
+
+#------------------------------------
+
     def go(game, list_of_words, number_of_parameters):
         """
         Move the player in the direction specified by the parameter.

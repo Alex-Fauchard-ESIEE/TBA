@@ -27,7 +27,8 @@ class Game:
         self.commands["quit"] = quit
         go = Command("go", " <direction> : se déplacer dans une direction cardinale (N, E, S, O)", Actions.go, 1)
         self.commands["go"] = go
-        
+        nothing = Command('', "'' : la commande vide ne fait rien", Actions.nothing, 0)
+        self.commands[""] = nothing
         # Setup rooms
 
         forest = Room("Forest", "dans une forêt enchantée. Vous entendez une brise légère à travers la cime des arbres.")
@@ -94,7 +95,7 @@ class Game:
 def main():
     # Create a game object and play the game
     Game().play()
-    
+
 
 if __name__ == "__main__":
     main()
