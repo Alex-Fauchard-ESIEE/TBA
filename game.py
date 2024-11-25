@@ -43,6 +43,20 @@ class Game:
         self.rooms.append(swamp)
         castle = Room("Castle", "dans un énorme château fort avec des douves et un pont levis. Sur les tours, des flèches en or massif.")
         self.rooms.append(castle)
+        kapry = Room("Kapry", "sur une planète riche en sucrerie et en fantaisie de toutes. Les kapryciens sont joyeux, gentils et festifs.")
+        self.rooms.append(kapry)
+        pandora = Room("Pandora", "sur une planète avec des humains géants")
+        self.rooms.append(pandora)
+        jafar = Room("Jafar", "")
+        self.rooms.append(jafar)
+        minto = Room("Minto", "")
+        self.rooms.append(minto)
+        pollux = Room("Pollux", "")
+        self.rooms.append(pollux)
+        sid = Room("Sid", "")
+        self.rooms.append(sid)
+        tancoeur = Room("Tancoeur","")
+        self.rooms.append(tancoeur)
 
         # Create exits for rooms
 
@@ -52,7 +66,10 @@ class Game:
         cottage.exits = {"N" : None, "E" : None, "S" : tower, "O" : cave}
         swamp.exits = {"N" : tower, "E" : None, "S" : None, "O" : castle}
         castle.exits = {"N" : forest, "E" : swamp, "S" : None, "O" : None}
-
+        tancoeur.exits = {"N" : None, "E" : None, "S" : Pandora, "O" : None} 
+        sid.exits = {"N" : None, "E" : None, "S" : None, "O" : Jafar}
+        pollux.exits = {"N" : None, "E" : None, "S" : Jafar, "O" : None}
+        pandora.exits = {"N" : Tancoeur, "E" : None, "S" : None, "O" : Kapry}
         # Setup player and starting room
 
         self.player = Player(input("\nEntrez votre nom: "))
