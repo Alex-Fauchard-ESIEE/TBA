@@ -25,23 +25,23 @@ class Game:
         self.commands["help"] = help
         quit = Command("quit", " : quitter le jeu", Actions.quit, 0)
         self.commands["quit"] = quit
-        go = Command("go", " <direction> : se déplacer dans une direction cardinale (N, E, S, O)", Actions.go, 1)
+        go = Command("go", " <direction> : se déplacer dans une direction cardinale et l'altitude (N, E, S, O, U, D)", Actions.go, 1)
         self.commands["go"] = go
         nothing = Command('', "'' : la commande vide ne fait rien", Actions.nothing, 0)
         self.commands[""] = nothing
         # Setup rooms
 
-        rue = Room("Rue principale", "Une véritable rue de western avec ses chevaux, ses cowboys et ses douilles au sol.")
+        rue = Room("Rue principale", "Je suis dans une véritable rue de western avec ses chevaux, ses cowboys et ses douilles au sol.")
         self.rooms.append(rue)
-        saloon = Room("Saloon", "Ce bon vieux saloon ne vous est plus accessible car le gérant vous a viré.")
+        saloon = Room("Saloon", "Ce bon vieux saloon ne m'est plus accessible car le gérant m'a viré.")
         self.rooms.append(saloon)
         sherif = Room("Bureau du shérif", "Le shérif est toujours là, histoire de veiller sur cette charmante petite ville.")
         self.rooms.append(sherif)
-        chapelle = Room("Chapelle", "La chappelle est calme, vous y trouvez un hôtel au fond et un confessionnal à votre gauche.")
+        chapelle = Room("Chapelle", "La chappelle est calme, je vois un hôtel au fond et un confessionnal à ma gauche.")
         self.rooms.append(chapelle)
-        hotel = Room("Hotel", "Vous vous situez dans l'entrée de l'hôtel, un réceptionniste vous fait face derrière le comptoir et vous voyez un escalier au fond.")
+        hotel = Room("Hotel", "Je suis dans l'entrée de l'hôtel, un réceptionniste me fait face derrière le comptoir et je vois un escalier au fond.")
         self.rooms.append(hotel)
-        etage = Room("Étage", "Dans ce couloir mal éclairé, vous distinguez 3 chambres autour de vous, et de multiples objets au sol.")
+        etage = Room("Étage", "Dans ce couloir mal éclairé, il y a 3 chambres, et de multiples objets au sol.")
         self.rooms.append(etage)
         chambre1 = Room("Chambre 1", "Une chambre tout à fait banal, avec une petite fenêtre donnant sur la rue principale")
         self.rooms.append(chambre1)
@@ -70,23 +70,25 @@ class Game:
 
         # Create exits for rooms
 
-        saloon.exits = {"N" : None, "E" : rue, "S" : None, "O" : None}
-        sherif.exits = {"N" : None, "E" : rue, "S" : None, "O" : None}
-        chapelle.exits = {"N" : None, "E" : rue, "S" : kapry, "O" : None}
-        hotel.exits = {"N" : None, "E" : etage, "S" : None, "O" : rue}
-        etage.exits = {"N" : chambre1, "E" : chambre2, "S" : None, "O" : chambre3}
-        chambre1.exits = {"N" : None, "E" : None, "S" : etage, "O" : None}
-        chambre2.exits = {"N" : None, "E" : None, "S" : None, "O" : etage}
-        chambre3.exits = {"N" : etage, "E" : None, "S" : None, "O" : None}
-        zany.exits = {"N" : None, "E" : None, "S" : minto, "O" : None}
-        litchie.exits = {"N" : minto, "E" : None, "S" : None, "O" : None}
-        minto.exits = {"N" : zany, "E" : kapry, "S" : litchie, "O" : jafar}
-        kapry.exits = {"N" : None, "E" : pandora, "S" : None, "O" : minto}
-        jafar.exits = {"N" : pollux, "E" : sid, "S" : minto, "O" : None}
-        tancoeur.exits = {"N" : None, "E" : None, "S" : pandora, "O" : None} 
-        sid.exits = {"N" : None, "E" : None, "S" : None, "O" : jafar}
-        pollux.exits = {"N" : None, "E" : None, "S" : jafar, "O" : None}
-        pandora.exits = {"N" : tancoeur, "E" : None, "S" : None, "O" : kapry}
+        rue.exits = {"N" : saloon, "E" : hotel, "S" : chapelle, "O" : sherif, "U" : None, "D" : None}
+        saloon.exits = {"N" : None, "E" : None, "S" : rue, "O" : None, "U" : None, "D" : None}
+        sherif.exits = {"N" : None, "E" : rue, "S" : None, "O" : None, "U" : None, "D" : None}
+        chapelle.exits = {"N" : rue, "E" : None, "S" : kapry, "O" : None, "U" : None, "D" : None}
+        hotel.exits = {"N" : None, "E" : None, "S" : None, "O" : rue, "U" : etage, "D" : None}
+        etage.exits = {"N" : chambre1, "E" : chambre2, "S" : None, "O" : chambre3, "U" : None, "D" : hotel}
+        chambre1.exits = {"N" : None, "E" : None, "S" : etage, "O" : None, "U" : None, "D" : None}
+        chambre2.exits = {"N" : None, "E" : None, "S" : None, "O" : etage, "U" : None, "D" : None}
+        chambre3.exits = {"N" : etage, "E" : None, "S" : None, "O" : None, "U" : None, "D" : None}
+        zany.exits = {"N" : None, "E" : None, "S" : None, "O" : None, "U" : None, "D" : minto}
+        litchie.exits = {"N" : None, "E" : None, "S" : None, "O" : None, "U" : None, "D" : minto}
+        minto.exits = {"N" : None, "E" : kapry, "S" : None, "O" : jafar, "U" : zany, "D" : litchie}
+        kapry.exits = {"N" : None, "E" : pandora, "S" : None, "O" : minto, "U" : None, "D" : None}
+        jafar.exits = {"N" : None, "E" : None, "S" : minto, "O" : None, "U" : pollux, "D" : sid}
+        tancoeur.exits = {"N" : None, "E" : None, "S" : None, "O" : None, "U" : None, "D" : pandora}
+        sid.exits = {"N" : None, "E" : None, "S" : None, "O" : None, "U" : None, "D" : jafar}
+        pollux.exits = {"N" : None, "E" : None, "S" : None, "O" : None, "U" : None, "D" : jafar}
+        pandora.exits = {"N" : None, "E" : None, "S" : None, "O" : kapry, "U" : tancoeur, "D" : None}
+        
         # Setup player and starting room
 
         self.player = Player(input("\nEntrez votre nom: "))
