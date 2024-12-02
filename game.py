@@ -57,7 +57,7 @@ class Game:
         self.rooms.append(kapry)
         pandora = Room("Pandora", "Cette planète peuplée d'humanoide me terrifie, elle est surprenante de par ses constructions originales et son ciel obscur. ")
         self.rooms.append(pandora)
-        jafar = Room("Jafar", "Cette planète a un paysage plutôt désertique avec de vastes étendue de dunes de sables, on peut apercevoir une grande ville luxueuse appelée "Casino Land"")
+        jafar = Room("Jafar", 'Cette planète a un paysage plutôt désertique avec de vastes étendue de dunes de sables, on peut apercevoir une grande ville luxueuse appelée "Casino Land"')
         self.rooms.append(jafar)
         minto = Room("Minto", "Ici prospère un calme absolu, le seul bruit que j'entend est celui des vagues qui s'échoue sur cette petite île paradisiaque entourée d'eau, tout comme le reste de la planète ")
         self.rooms.append(minto)
@@ -89,6 +89,11 @@ class Game:
         pollux.exits = {"N" : None, "E" : None, "S" : None, "O" : None, "U" : None, "D" : jafar}
         pandora.exits = {"N" : None, "E" : None, "S" : None, "O" : kapry, "U" : tancoeur, "D" : None}
         
+        # Setup sets for room's exits
+        sorties_valides = set()
+        for e in self.rooms :
+            sorties_valides = sorties_valides | set(e.exits.keys())
+
         # Setup player and starting room
 
         self.player = Player(input("\nEntrez votre nom: "))
