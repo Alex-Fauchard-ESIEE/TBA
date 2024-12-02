@@ -15,6 +15,8 @@
 MSG0 = "\nLa commande '{command_word}' ne prend pas de paramètre.\n"
 # The MSG1 variable is used when the command takes 1 parameter.
 MSG1 = "\nLa commande '{command_word}' prend 1 seul paramètre.\n"
+# 
+MSG2 = "\nLa direction '{direction}' n'existe pas.\n"
 
 class Actions:
 
@@ -68,9 +70,16 @@ class Actions:
             return False
 
         # Get the direction from the list of words.
-        direction = list_of_words[1]
         # Move the player in the direction specified by the parameter.
-        player.move(direction)
+        direction = list_of_words[1].upper()
+        if direction in {"NORD", "SUD", "OUEST", "EST", "DOWN", "UP"} :
+            direction = direction[0]
+            print(direction)
+        if direction in game.sorties_valides :
+            print(game.sorties_valides)
+            player.move(direction)
+        else :
+            print(MSG2.format(direction=list_of_words[1]))
         return True
 
     def quit(game, list_of_words, number_of_parameters):

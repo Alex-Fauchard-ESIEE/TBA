@@ -15,6 +15,7 @@ class Game:
         self.rooms = []
         self.commands = {}
         self.player = None
+        self.sorties_valides = set()
     
     # Setup the game
     def setup(self):
@@ -90,9 +91,8 @@ class Game:
         pandora.exits = {"N" : None, "E" : None, "S" : None, "O" : kapry, "U" : tancoeur, "D" : None}
         
         # Setup sets for room's exits
-        sorties_valides = set()
         for e in self.rooms :
-            sorties_valides = sorties_valides | set(e.exits.keys())
+            self.sorties_valides = self.sorties_valides | set(e.exits.keys())
 
         # Setup player and starting room
 
