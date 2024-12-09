@@ -74,9 +74,9 @@ class Actions:
         direction = list_of_words[1].upper()
         if direction in {"NORD", "SUD", "OUEST", "EST", "DOWN", "UP"} :
             direction = direction[0]
-            print(direction)
+            #print(direction) c'etait un test
         if direction in game.sorties_valides :
-            print(game.sorties_valides)
+            #print(game.sorties_valides) c'etait un test
             player.move(direction)
         else :
             print(MSG2.format(direction=list_of_words[1]))
@@ -120,6 +120,43 @@ class Actions:
         print(msg)
         game.finished = True
         return True
+
+    def history(game, list_of_words, number_of_parameters):
+        l = len(list_of_words)
+        # If the number of parameters is incorrect, print an error message and return False.
+        if l != number_of_parameters + 1:
+            command_word = list_of_words[0]
+            print(MSG0.format(command_word=command_word))
+            return False
+        
+        player = game.player
+        print(player.get_history())
+        return True
+
+    def back(game, list_of_words, number_of_parameters):
+        l = len(list_of_words)
+        # If the number of parameters is incorrect, print an error message and return False.
+        if l != number_of_parameters + 1:
+            command_word = list_of_words[0]
+            print(MSG0.format(command_word=command_word))
+            return False
+        
+        player = game.player
+        #liste_valeurs = list(player.current_room.exits.values())
+        liste_valeurs = [e for e in player.current_room.exits.values() if e != None] # On récupère uniquement les sorties non vides.
+        for i in range (len(liste_valeurs)):
+            liste_valeurs[i] = liste_valeurs[i].name
+        print(liste_valeurs) #c'etait un test
+
+        if player.history == [] :
+            print("Il n'est pas possible de revenir en arrière, tu es déjà au point de départ.\n")
+        if player.history != [] and str(player.history[-1]) in liste_valeurs :
+            player.current_room = player.history[-1]
+            print(game.room.current_room.get_long_description())
+            print(player.get_history())
+        if player.history != [] and str(player.history[-1]) not in liste_valeurs :
+            print("Il n'est pas possible de revenir en arrière car le passage est à sens unique.\n")
+        
 
     def help(game, list_of_words, number_of_parameters):
         """
