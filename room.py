@@ -10,6 +10,7 @@ class Room:
         name : nom de la pièce
         description : une description de la pièce
         exits : les différentes sorties de la pièce
+        inventory : 
 
     Les méthodes de la classe sont :
         __init__() : constructeur
@@ -49,6 +50,7 @@ class Room:
         self.name = name
         self.description = description
         self.exits = {}
+        self.inventory = ()
     
     # Define the get_exit method.
     def get_exit(self, direction):
@@ -71,3 +73,20 @@ class Room:
     # Return a long description of this room including exits.
     def get_long_description(self):
         return f"\n{self.description}\n\n{self.get_exit_string()}\n"
+
+    def get_inventory(self):
+        """
+        Retourne une chaîne de caractères représentant le contenu de l'inventaire de la pièce.
+        """
+        if not self.inventory:
+            print("Il n'y a rien ici.")
+            return None
+        
+        result = ["La pièce contient:\n"]
+        for item_name, details in self.inventory.items():
+            description = details['description']
+            weight = details['weight']
+            quantity = details['quantity']
+            result.append(f"    - {item_name} : {description} ({weight} kg) x{quantity}")
+        
+        return "\n".join(result)

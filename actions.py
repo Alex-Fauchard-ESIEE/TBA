@@ -160,3 +160,7 @@ class Actions:
             print("\t- " + str(command))
         print()
         return True
+
+    def look(game,list_of_words,number_of_parameters):
+        
+

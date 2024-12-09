@@ -5,9 +5,11 @@ class Player():
 
     attribut 1 : self.name
     attribut 2 : self.current_name
+    attribut 3 : self.inventory
 
     __init__ : définie le constructeur
     move () : donne le procéder pour changer de room
+
 
     une liste des exceptions levées par la classe (optionnel) ;
 
@@ -31,6 +33,7 @@ class Player():
     def __init__(self, name):
         self.name = name
         self.current_room = None
+        self.inventory = {}  # Initialise l'inventaire comme un dictionnaire vide.
     
     # Define the move method.
     def move(self, direction):
@@ -47,4 +50,20 @@ class Player():
         print(self.current_room.get_long_description())
         return True
 
-    
+
+    def get_inventory(self):
+        """
+        Retourne une chaîne de caractères représentant le contenu de l'inventaire du joueur.
+        """
+        if not self.inventory:
+            print("Votre inventaire est vide.")
+            return None
+        
+        result = ["Vous disposez des items suivants :\n"]
+        for item_name, details in self.inventory.items():
+            description = details['description']
+            weight = details['weight']
+            quantity = details['quantity']
+            result.append(f"    - {item_name} : {description} ({weight} kg) x{quantity}")
+        
+        return "\n".join(result)
