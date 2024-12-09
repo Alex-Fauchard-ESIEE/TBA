@@ -81,6 +81,8 @@ class Actions:
         else :
             print(MSG2.format(direction=list_of_words[1]))
         return True
+    
+#------------------------------------
 
     def quit(game, list_of_words, number_of_parameters):
         """
@@ -132,6 +134,8 @@ class Actions:
         player = game.player
         print(player.get_history())
         return True
+    
+#------------------------------------
 
     def back(game, list_of_words, number_of_parameters):
         l = len(list_of_words)
@@ -155,6 +159,22 @@ class Actions:
         elif player.history != [] and player.history[-1] not in liste_valeurs :
             print("Tu ne peux pas revenir en arrière car le passage est à sens unique.\n")
         return None
+      
+#------------------------------------
+  
+    def inventory(game, list_of_words, number_of_parameters):
+        l = len(list_of_words)
+        # If the number of parameters is incorrect, print an error message and return False.
+        if l != number_of_parameters + 1:
+            command_word = list_of_words[0]
+            print(MSG0.format(command_word=command_word))
+            return False
+        
+        player = game.player
+        print(player.get_inventory())
+        return True
+
+#------------------------------------
 
     def help(game, list_of_words, number_of_parameters):
         """
@@ -195,6 +215,55 @@ class Actions:
             print("\t- " + str(command))
         print()
         return True
+    
+#------------------------------------
 
     def look(game,list_of_words,number_of_parameters):
+        l = len(list_of_words)
+        if l != number_of_parameters + 1:
+            command_word = list_of_words[0]
+            print(MSG0.format(command_word=command_word))
+            return False
+        
+        print(game.current_room.get_long_description())
+        print(game.current_room.inventory())
+            
+#------------------------------------
+
+    def take(game,list_of_words,number_of_parameters):
+        l = len(list_of_words)
+        if l != number_of_parameters + 1:
+            command_word = list_of_words[0]
+            print(MSG1.format(command_word=command_word))
+            return False
+        
+        game.current_room.inventory.remove(list_of_words[1])
+        game.player.inventory.add(list_of_words[1])
+        print(list_of_words[1],"est maintenant bien au chaud dans votre inventaire.")
+        return game.player.inventory   
+
+#------------------------------------
+
+    def drop(game,list_of_words,number_of_parameters):
+        l = len(list_of_words)
+        if l != number_of_parameters + 1:
+            command_word = list_of_words[0]
+            print(MSG1.format(command_word=command_word))
+            return False
+        
+        game.player.inventory.remove(list_of_words[1])
+        game.current_room.inventory.add(list_of_words[1])
+        print(list_of_words[1],"est maintenant sur le sol froid.")
+        return game.current_room.inventory
+
+#------------------------------------
+
+    def check(game,list_of_words,number_of_parameters):
+        l = len(list_of_words)
+        if l != number_of_parameters + 1:
+            command_word = list_of_words[0]
+            print(MSG0.format(command_word=command_word))
+            return False
+        
+        print(game.player.inventory)
         return None

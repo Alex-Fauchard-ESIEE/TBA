@@ -47,13 +47,18 @@ class Room:
     >>> forest.get_exit_string()
     'Sorties: N, S'
     """
+    
+#------------------------------------
+
     # Define the constructor. 
     def __init__(self, name, description):
         self.name = name
         self.description = description
         self.exits = {}
-        self.inventory = ()
-    
+        self.inventory = set()
+     
+#------------------------------------
+   
     # Define the get_exit method.
     def get_exit(self, direction):
 
@@ -62,7 +67,9 @@ class Room:
             return self.exits[direction]
         else:
             return None
-    
+      
+#------------------------------------
+  
     # Return a string describing the room's exits.
     def get_exit_string(self):
         exit_string = "Sortie(s) : " 
@@ -71,24 +78,26 @@ class Room:
                 exit_string += exit + ", "
         exit_string = exit_string.strip(", ")
         return exit_string
+    
+#------------------------------------
 
     # Return a long description of this room including exits.
     def get_long_description(self):
         return f"\n{self.description}\n\n{self.get_exit_string()}\n"
+    
+#------------------------------------
 
     def get_inventory(self):
         """
         Retourne une chaîne de caractères représentant le contenu de l'inventaire de la pièce.
         """
-        if not self.inventory:
-            print("Il n'y a rien ici.")
-            return None
+        if self.inventory == {} :
+            print("\nIl n'y a rien d'intéressant ici...")
+            return ''
         
-        result = ["La pièce contient:\n"]
+        result = "\nLa pièce contient :\n"
         for item_name, details in self.inventory.items():
             description = details['description']
             weight = details['weight']
-            quantity = details['quantity']
-            result.append(f"    - {item_name} : {description} ({weight} kg) x{quantity}")
-        
-        return "\n".join(result)
+            result += "    - {item_name} : {description} ({weight} kg)\n"
+        return result

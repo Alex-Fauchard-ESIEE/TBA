@@ -33,8 +33,18 @@ class Game:
         history = Command("history", " : afficher le chemin parcouru depuis le début du jeu", Actions.history, 0)
         self.commands["history"] = history
         back = Command("back", " : retourner au lieu précédent, si cela est possible", Actions.back, 0)
-        self.commands["back"]=back
-
+        self.commands["back"] = back
+        inventory = Command("inventory", " : regarder le contenu de son inventaire", Actions.inventory, 0)
+        self.commands["inventory"] = inventory
+        look = Command("look", " : chercher des objet dans la pièce où tu es", Actions.look, 0)
+        self.commands["look"] = look
+        take = Command("take", " : prendre un objet dans la pièce", Actions.take, 1)
+        self.commands["take"] = take
+        drop = Command("drop", " : lâcher un objet de son inventaire", Actions.drop, 1)
+        self.commands["drop"] = drop
+        check = Command("check", " : jeter un oeil à son inventaire", Actions.check, 0)
+        self.commands["check"] = check
+    
         # Setup rooms
 
         rue = Room("Rue principale", "Je suis dans une véritable rue de western avec ses chevaux, ses cowboys et ses douilles au sol.")

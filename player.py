@@ -35,11 +35,12 @@ class Player():
         self.history = [] # Initialise l'historique
         self.current_room = None
         self.inventory = {}  # Initialise l'inventaire comme un dictionnaire vide.
-    
+      
+#------------------------------------
+  
     # Define get_history
-
     def get_history(self):
-        history = "Vous avez déjà visité les pièces suivantes:\n"
+        history = "\nVous avez déjà visité les pièces suivantes:\n"
         if self.history == [] :
             return ''
         else :
@@ -47,7 +48,7 @@ class Player():
                 history += "- " + str(room.name) + "\n"
         return history
             
-
+#------------------------------------
 
     # Define the move method.
     def move(self, direction):
@@ -65,21 +66,20 @@ class Player():
         print(self.current_room.get_long_description())
         print(self.get_history())
         return True
-
+    
+#------------------------------------
 
     def get_inventory(self):
         """
         Retourne une chaîne de caractères représentant le contenu de l'inventaire du joueur.
         """
-        if not self.inventory:
-            print("Votre inventaire est vide.")
-            return None
+        if self.inventory == {} :
+            print("\nVotre inventaire est vide.")
+            return ''
         
-        result = ["Vous disposez des items suivants :\n"]
+        result = "\nVous disposez des items suivants :\n"
         for item_name, details in self.inventory.items():
             description = details['description']
             weight = details['weight']
-            quantity = details['quantity']
-            result.append(f"    - {item_name} : {description} ({weight} kg) x{quantity}")
-        
-        return "\n".join(result)
+            result += "    - {item_name} : {description} ({weight} kg)\n"
+        return result
