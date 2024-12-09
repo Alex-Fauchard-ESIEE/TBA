@@ -142,21 +142,19 @@ class Actions:
             return False
         
         player = game.player
-        #liste_valeurs = list(player.current_room.exits.values())
         liste_valeurs = [e for e in player.current_room.exits.values() if e != None] # On récupère uniquement les sorties non vides.
-        for i in range (len(liste_valeurs)):
-            liste_valeurs[i] = liste_valeurs[i].name
-        print(liste_valeurs) #c'etait un test
+        #print(player.history[-1], type(player.history[-1])) # test
 
         if player.history == [] :
             print("Il n'est pas possible de revenir en arrière, tu es déjà au point de départ.\n")
-        if player.history != [] and str(player.history[-1]) in liste_valeurs :
-            player.current_room = player.history[-1]
-            print(game.room.current_room.get_long_description())
+        elif player.history != [] and player.history[-1] in liste_valeurs :
+            player.current_room = game.player.history[-1]
+            print(player.current_room.get_long_description())
+            del player.history[-1]
             print(player.get_history())
-        if player.history != [] and str(player.history[-1]) not in liste_valeurs :
+        if player.history != [] and player.history[-1] not in liste_valeurs :
             print("Il n'est pas possible de revenir en arrière car le passage est à sens unique.\n")
-        
+        return None
 
     def help(game, list_of_words, number_of_parameters):
         """
@@ -199,5 +197,4 @@ class Actions:
         return True
 
     def look(game,list_of_words,number_of_parameters):
-        
-
+        return None

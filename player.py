@@ -41,10 +41,10 @@ class Player():
     def get_history(self):
         history = "Vous avez déjà visité les pièces suivantes:\n"
         if self.history == [] :
-            return None
+            return ''
         else :
             for room in self.history :
-                history += "- " + str(room) + "\n"
+                history += "- " + str(room.name) + "\n"
         return history
             
 
@@ -60,7 +60,7 @@ class Player():
             return False
         
         # Set the current room to the next room.
-        self.history.append(self.current_room.name)
+        self.history.append(self.current_room)
         self.current_room = next_room
         print(self.current_room.get_long_description())
         print(self.get_history())
