@@ -237,10 +237,15 @@ class Actions:
             print(MSG1.format(command_word=command_word))
             return False
         
-        game.current_room.inventory.remove(list_of_words[1])
-        game.player.inventory.add(list_of_words[1])
-        print(list_of_words[1],"est maintenant bien au chaud dans votre inventaire.")
-        return game.player.inventory   
+        obj = list_of_words[1].capitalize
+        if list_of_words[1] in game.current_room.inventory :
+            game.current_room.inventory.remove(list_of_words[1])
+            game.player.inventory.add(list_of_words[1])
+            print(obj,"est maintenant bien au chaud dans ton inventaire.")
+            return game.player.inventory
+        else :
+            print(obj ," n'est pas dans la pièce.")
+        return None
 
 #------------------------------------
 
@@ -251,10 +256,15 @@ class Actions:
             print(MSG1.format(command_word=command_word))
             return False
         
-        game.player.inventory.remove(list_of_words[1])
-        game.current_room.inventory.add(list_of_words[1])
-        print(list_of_words[1],"est maintenant sur le sol froid.")
-        return game.current_room.inventory
+        obj = list_of_words[1].capitalize
+        if list_of_words[1] in game.player.inventory :
+            game.player.inventory.remove(list_of_words[1])
+            game.current_room.inventory.add(list_of_words[1])
+            print(obj,"est maintenant sur le sol froid.")
+            return game.current_room.inventory
+        else :
+            print(obj ," n'est pas dans ton inventaire.")
+        return None
 
 #------------------------------------
 

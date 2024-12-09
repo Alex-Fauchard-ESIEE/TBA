@@ -114,6 +114,10 @@ class Game:
         self.player = Player(input("\nEntrez votre nom: "))
         self.player.current_room = rue
 
+        # Setup items for rooms
+
+        rue.inventory = {"N" : saloon, "E" : hotel, "S" : chapelle, "O" : sherif, "U" : None, "D" : None}
+
     # Play the game
     def play(self):
         self.setup()

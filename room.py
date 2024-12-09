@@ -55,7 +55,7 @@ class Room:
         self.name = name
         self.description = description
         self.exits = {}
-        self.inventory = set()
+        self.inventory = {}
      
 #------------------------------------
    
