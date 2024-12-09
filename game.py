@@ -30,6 +30,11 @@ class Game:
         self.commands["go"] = go
         nothing = Command('', "'' : la commande vide ne fait rien", Actions.nothing, 0)
         self.commands[""] = nothing
+        history = Command("history", " : affiche le chemin parcouru depuis le début du jeu", Actions.history, 0)
+        self.commands["history"] = history
+        back = Command("back", "permet de retourner au lieu précédent, si cela est possible", Actions.back, 0)
+        self.commands["back"]=back
+
         # Setup rooms
 
         rue = Room("Rue principale", "Je suis dans une véritable rue de western avec ses chevaux, ses cowboys et ses douilles au sol.")

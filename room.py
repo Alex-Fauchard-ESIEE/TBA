@@ -1,3 +1,5 @@
+import player
+
 # Define the Room class.
 
 class Room:
