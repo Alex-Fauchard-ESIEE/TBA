@@ -146,14 +146,14 @@ class Actions:
         #print(player.history[-1], type(player.history[-1])) # test
 
         if player.history == [] :
-            print("Il n'est pas possible de revenir en arrière, tu es déjà au point de départ.\n")
+            print("Tu ne peux pas revenir en arrière, tu es déjà au point de départ !\n")
         elif player.history != [] and player.history[-1] in liste_valeurs :
             player.current_room = game.player.history[-1]
             print(player.current_room.get_long_description())
             del player.history[-1]
             print(player.get_history())
-        if player.history != [] and player.history[-1] not in liste_valeurs :
-            print("Il n'est pas possible de revenir en arrière car le passage est à sens unique.\n")
+        elif player.history != [] and player.history[-1] not in liste_valeurs :
+            print("Tu ne peux pas revenir en arrière car le passage est à sens unique.\n")
         return None
 
     def help(game, list_of_words, number_of_parameters):
