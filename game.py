@@ -6,6 +6,7 @@ from room import Room
 from player import Player
 from command import Command
 from actions import Actions
+from item import Item
 
 class Game:
 
@@ -116,7 +117,10 @@ class Game:
 
         # Setup items for rooms
 
-        rue.inventory = {"N" : saloon, "E" : hotel, "S" : chapelle, "O" : sherif, "U" : None, "D" : None}
+        sword = Item("épée", "une épée au fil tranchant comme un rasoir", 2)
+        rue.inventory["épée"] = sword
+       
+
 
     # Play the game
     def play(self):

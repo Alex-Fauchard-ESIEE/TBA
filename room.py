@@ -96,8 +96,6 @@ class Room:
             return ''
         
         result = "\nLa pièce contient :\n"
-        for item_name, details in self.inventory.items():
-            description = details['description']
-            weight = details['weight']
-            result += "    - {item_name} : {description} ({weight} kg)\n"
+        for item in self.inventory.values():
+            result += f"    - {item.name} : {item.description} ({item.weight} kg)\n"
         return result

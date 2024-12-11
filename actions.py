@@ -225,8 +225,9 @@ class Actions:
             print(MSG0.format(command_word=command_word))
             return False
         
-        print(game.current_room.get_long_description())
-        print(game.current_room.inventory())
+        player = game.player
+        print(player.current_room.get_long_description())
+        print(player.current_room.get_inventory())
             
 #------------------------------------
 
@@ -237,12 +238,13 @@ class Actions:
             print(MSG1.format(command_word=command_word))
             return False
         
+        player = game.player
         obj = list_of_words[1].capitalize
-        if list_of_words[1] in game.current_room.inventory :
-            game.current_room.inventory.remove(list_of_words[1])
-            game.player.inventory.add(list_of_words[1])
+        if list_of_words[1] in player.current_room.inventory :
+            del player.current_room.inventory[list_of_words[1]]
+            player.inventory[list_of_words[1]] = f"    - {list_of_words[1].name} : {list_of_words[1].description} ({list_of_words[1].weight} kg)\n"
             print(obj,"est maintenant bien au chaud dans ton inventaire.")
-            return game.player.inventory
+            return player.inventory
         else :
             print(obj ," n'est pas dans la pièce.")
         return None
@@ -256,10 +258,11 @@ class Actions:
             print(MSG1.format(command_word=command_word))
             return False
         
+        player = game.player
         obj = list_of_words[1].capitalize
-        if list_of_words[1] in game.player.inventory :
-            game.player.inventory.remove(list_of_words[1])
-            game.current_room.inventory.add(list_of_words[1])
+        if list_of_words[1] in player.inventory :
+            player.inventory.remove(list_of_words[1])
+            player.current_room.inventory.add(list_of_words[1])
             print(obj,"est maintenant sur le sol froid.")
             return game.current_room.inventory
         else :
