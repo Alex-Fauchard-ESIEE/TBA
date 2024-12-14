@@ -117,8 +117,8 @@ class Game:
 
         # Setup items for rooms
 
-        sword = Item("épée", "une épée au fil tranchant comme un rasoir", 2)
-        rue.inventory["épée"] = sword
+        EPEE = Item("épée", "une épée au fil tranchant comme un rasoir", 2)
+        rue.inventory["EPEE"] = EPEE
        
 
 

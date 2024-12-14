@@ -239,14 +239,16 @@ class Actions:
             return False
         
         player = game.player
-        obj = list_of_words[1].capitalize
-        if list_of_words[1] in player.current_room.inventory :
-            del player.current_room.inventory[list_of_words[1]]
-            player.inventory[list_of_words[1]] = f"    - {list_of_words[1].name} : {list_of_words[1].description} ({list_of_words[1].weight} kg)\n"
-            print(obj,"est maintenant bien au chaud dans ton inventaire.")
+        table_remplacement = str.maketrans("ÉÈÀÙÇÊË","EEAUCEE")
+        obj_recherche = list_of_words[1].upper().translate(table_remplacement).strip()
+        #print(obj_recherche) # test
+        if obj_recherche in player.current_room.inventory :
+            player.inventory[obj_recherche] = player.current_room.inventory[obj_recherche]
+            print(player.inventory[obj_recherche].name.capitalize(),"est maintenant bien au chaud dans ton inventaire.")
+            del player.current_room.inventory[obj_recherche]
             return player.inventory
         else :
-            print(obj ," n'est pas dans la pièce.")
+            print(list_of_words[1].capitalize() ,"n'est pas dans la pièce.")
         return None
 
 #------------------------------------
@@ -259,14 +261,16 @@ class Actions:
             return False
         
         player = game.player
-        obj = list_of_words[1].capitalize
-        if list_of_words[1] in player.inventory :
-            player.inventory.remove(list_of_words[1])
-            player.current_room.inventory.add(list_of_words[1])
-            print(obj,"est maintenant sur le sol froid.")
-            return game.current_room.inventory
+        #print(player.inventory) # test
+        table_remplacement = str.maketrans("ÉÈÀÙÇÊË","EEAUCEE")
+        obj_recherche = list_of_words[1].upper().translate(table_remplacement).strip()
+        if obj_recherche in player.inventory :
+            player.current_room.inventory[obj_recherche] = player.inventory[obj_recherche]
+            print(player.inventory[obj_recherche].name.capitalize(),"est maintenant sur le sol froid.")
+            del player.inventory[obj_recherche]
+            return player.current_room.inventory
         else :
-            print(obj ," n'est pas dans ton inventaire.")
+            print(list_of_words[1].capitalize() ," n'est pas dans ton inventaire.")
         return None
 
 #------------------------------------
@@ -278,5 +282,5 @@ class Actions:
             print(MSG0.format(command_word=command_word))
             return False
         
-        print(game.player.inventory)
+        print(game.player.get_inventory())
         return None

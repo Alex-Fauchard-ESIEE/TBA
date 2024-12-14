@@ -1,11 +1,11 @@
-Class Character():
+class Character():
 
 #Define the constructor
-def__init__(self,name):
+def __init__(self,name):
     self.name = name
     self.description = []
     self.current_room = []
-    self.msgs = msgs[]
+    self.msgs = []
 
 
 def __str__(self):
