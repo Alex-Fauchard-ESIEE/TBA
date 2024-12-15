@@ -1,6 +1,4 @@
-import player
-
-# Define the Room class.
+    # Define the Room class.
 
 class Room:
     """
@@ -56,6 +54,7 @@ class Room:
         self.description = description
         self.exits = {}
         self.inventory = {}
+        self.characters = {}
      
 #------------------------------------
    
@@ -91,11 +90,13 @@ class Room:
         """
         Retourne une chaîne de caractères représentant le contenu de l'inventaire de la pièce.
         """
-        if self.inventory == {} :
+        if self.inventory == {} and self.characters == {} :
             print("\nIl n'y a rien d'intéressant ici...")
             return ''
         
-        result = "\nLa pièce contient :\n"
+        result = "\nOn voit :\n"
         for item in self.inventory.values():
             result += f"    - {item.name} : {item.description} ({item.weight} kg)\n"
+        for character in self.characters.values() :
+                result += f"    - {character.name} : {character.description}\n"
         return result

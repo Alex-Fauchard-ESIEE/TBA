@@ -74,10 +74,23 @@ class Actions:
         direction = list_of_words[1].upper()
         if direction in {"NORD", "SUD", "OUEST", "EST", "DOWN", "UP"} :
             direction = direction[0]
-            #print(direction) c'etait un test
+            #print(direction) # test
         if direction in game.sorties_valides :
-            #print(game.sorties_valides) c'etait un test
+            #print(game.sorties_valides) # test
             player.move(direction)
+            #print(game.rooms) #test
+            for r in game.rooms :
+                for char in r.characters : #### PROBLÈME ####
+                    rch = r.characters[char]
+                    # print(r.characters) # test
+                    if rch.move_or_not == 1 :
+                        # print("Voilà : ", char, "et", type(char)) # test
+                        temp = rch.current_room
+                        rch.move()
+                        if temp != rch.current_room :
+                            del temp.characters[char]
+                            rch.current_room.characters[char] = rch
+                    print(char, ":",rch.current_room.name) # test
         else :
             print(MSG2.format(direction=list_of_words[1]))
         return True
@@ -118,7 +131,7 @@ class Actions:
         
         # Set the finished attribute of the game object to True.
         player = game.player
-        msg = f"\nMerci {player.name} d'avoir joué. Au revoir.\n"
+        msg = f"\nMerci d'avoir joué {player.name}.\nÀ la prochaine !\n"
         print(msg)
         game.finished = True
         return True
@@ -284,3 +297,22 @@ class Actions:
         
         print(game.player.get_inventory())
         return None
+    
+#------------------------------------
+
+    def talk(game,list_of_words,number_of_parameters):
+        l = len(list_of_words)
+        if l != number_of_parameters + 1:
+            command_word = list_of_words[0]
+            print(MSG1.format(command_word=command_word))
+            return False
+        
+        player = game.player
+        table_remplacement = str.maketrans("ÉÈÀÙÇÊË","EEAUCEE")
+        character_recherche = list_of_words[1].upper().translate(table_remplacement).strip()
+        if character_recherche in player.current_room.characters :
+            print(player.current_room.characters[character_recherche].get_msg())
+            return True
+        else :
+            print("Hmmmm personne ici ne s'appelle comme ça")
+            return False

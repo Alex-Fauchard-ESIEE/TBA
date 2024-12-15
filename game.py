@@ -7,6 +7,7 @@ from player import Player
 from command import Command
 from actions import Actions
 from item import Item
+from character import Character
 
 class Game:
 
@@ -37,7 +38,7 @@ class Game:
         self.commands["back"] = back
         inventory = Command("inventory", " : regarder le contenu de son inventaire", Actions.inventory, 0)
         self.commands["inventory"] = inventory
-        look = Command("look", " : chercher des objet dans la pièce où tu es", Actions.look, 0)
+        look = Command("look", " : chercher des objets et des personnes dans la pièce", Actions.look, 0)
         self.commands["look"] = look
         take = Command("take", " : prendre un objet dans la pièce", Actions.take, 1)
         self.commands["take"] = take
@@ -45,7 +46,9 @@ class Game:
         self.commands["drop"] = drop
         check = Command("check", " : jeter un oeil à son inventaire", Actions.check, 0)
         self.commands["check"] = check
-    
+        talk = Command("talk <character>", " : Parler au personnage", Actions.talk, 1)
+        self.commands["talk"] = talk
+
         # Setup rooms
 
         rue = Room("Rue principale", "Je suis dans une véritable rue de western avec ses chevaux, ses cowboys et ses douilles au sol.")
@@ -107,19 +110,36 @@ class Game:
         pandora.exits = {"N" : None, "E" : None, "S" : None, "O" : kapry, "U" : tancoeur, "D" : None}
         
         # Setup sets for room's exits
+
         for e in self.rooms :
             self.sorties_valides = self.sorties_valides | set(e.exits.keys())
-
-        # Setup player and starting room
-
-        self.player = Player(input("\nEntrez votre nom: "))
-        self.player.current_room = rue
 
         # Setup items for rooms
 
         EPEE = Item("épée", "une épée au fil tranchant comme un rasoir", 2)
         rue.inventory["EPEE"] = EPEE
-       
+
+        # Setup PNJs for rooms 
+
+        # Pour les phrases, on met un 0 si le personnage ne dit rien
+        # Le dernier paramètre est pour savoir si le personnage peut changer de pièce
+        GANDALF = Character("Gandalf", "un magicien blanc", rue, ["Abracadabra !"], 1)
+        rue.characters["GANDALF"] = GANDALF
+        PATATE = Character("Patate", "Une magnifique patate", rue, [0], 0)
+        rue.characters["PATATE"] = PATATE
+        BOB = Character("Bob", "une éponge", sherif, ["Patriiiiiick"], 1)
+        sherif.characters["BOB"] = BOB
+
+        # Setup player and starting room
+
+        self.player = Player(input("\nEntrez votre nom: "))
+        #exits = [value.name for value in list(rue.exits.values()) if value != None] #test
+        #print(exits) #test
+        #a = list(rue.exits.values()) #test
+        #print(a, a[1].name, type(a[1])) #test
+        self.player.current_room = rue
+        self.player.inventory = {}
+        self.player.character = {}
 
 
     # Play the game

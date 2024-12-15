@@ -32,9 +32,9 @@ class Player():
     # Define the constructor.
     def __init__(self, name):
         self.name = name
-        self.history = [] # Initialise l'historique
+        self.history = []
         self.current_room = None
-        self.inventory = {}  # Initialise l'inventaire comme un dictionnaire vide.
+        self.inventory = {}
       
 #------------------------------------
   
@@ -81,3 +81,4 @@ class Player():
         for item in self.inventory.values():
             result += f"    - {item.name} : {item.description} ({item.weight} kg)\n"
         return result
+        
