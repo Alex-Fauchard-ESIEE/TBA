@@ -18,6 +18,7 @@ class Game:
         self.commands = {}
         self.player = None
         self.sorties_valides = set()
+        self.all_characters = {}
     
     # Setup the game
     def setup(self):
@@ -123,12 +124,19 @@ class Game:
 
         # Pour les phrases, on met un 0 si le personnage ne dit rien
         # Le dernier paramètre est pour savoir si le personnage peut changer de pièce
-        GANDALF = Character("Gandalf", "un magicien blanc", rue, ["Abracadabra !"], 1)
+        GANDALF = Character("Gandalf", "un magicien blanc", rue, ["Abracadabra !", "Bizzzzz"], 1)
         rue.characters["GANDALF"] = GANDALF
-        PATATE = Character("Patate", "Une magnifique patate", rue, [0], 0)
+        PATATE = Character("Patate", "une magnifique patate", rue, [], 0)
         rue.characters["PATATE"] = PATATE
-        BOB = Character("Bob", "une éponge", sherif, ["Patriiiiiick"], 1)
+        BOB = Character("Bob", "simplement une éponge", sherif, ["Patriiiiiick"], 1)
         sherif.characters["BOB"] = BOB
+
+        # Setup the dict of all characters
+
+        for r in self.rooms :
+            for char in r.characters :
+                self.all_characters[char] = r.characters[char]
+    
 
         # Setup player and starting room
 

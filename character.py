@@ -33,10 +33,14 @@ class Character():
 
     def get_msg(self) :
         #print(self.msgs, type(self.msgs)) # test
-        if self.msgs != [0] :
-            for i in range (len(self.msgs)) :
-                return self.msgs.pop(i)
+        if self.msgs != [] : #not in ([] , [0]) :
+                msg = self.msgs.pop(0)
+                self.msgs.append(msg)
+                return msg
+        #elif self.msgs == []  :
+            #return f"{self.name} n'a plus rien à vous dire..."
         elif self.msgs == [] :
-            return "Il n'a plus rien à vous dire..."
-        elif self.msgs == [0] :
-            return "Il n'a vraisemblablement rien à vous dire..."
+            return f"{self.name} n'a vraisemblablement rien à vous dire..."
+        else :
+            return False
+

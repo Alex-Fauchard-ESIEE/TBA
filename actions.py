@@ -74,23 +74,22 @@ class Actions:
         direction = list_of_words[1].upper()
         if direction in {"NORD", "SUD", "OUEST", "EST", "DOWN", "UP"} :
             direction = direction[0]
-            #print(direction) # test
         if direction in game.sorties_valides :
-            #print(game.sorties_valides) # test
             player.move(direction)
-            #print(game.rooms) #test
-            for r in game.rooms :
-                for char in r.characters : #### PROBLÈME ####
-                    rch = r.characters[char]
-                    # print(r.characters) # test
-                    if rch.move_or_not == 1 :
-                        # print("Voilà : ", char, "et", type(char)) # test
-                        temp = rch.current_room
-                        rch.move()
-                        if temp != rch.current_room :
-                            del temp.characters[char]
-                            rch.current_room.characters[char] = rch
-                    print(char, ":",rch.current_room.name) # test
+
+            ### La seconde partie du code permet au pnjs de bouger de façon aléatoire ###
+            #print(game.all_characters) #test
+            for char in game.all_characters :
+                ach = game.all_characters[char]
+                # print(r.characters) # test
+                if ach.move_or_not == 1 :
+                    # print("Voilà : ", char, "et", type(char)) # test
+                    temp = ach.current_room
+                    ach.move()
+                    if temp != ach.current_room :
+                        del temp.characters[char]
+                        ach.current_room.characters[char] = ach
+                #print(char, ":",ach.current_room.name) # test
         else :
             print(MSG2.format(direction=list_of_words[1]))
         return True
@@ -135,6 +134,8 @@ class Actions:
         print(msg)
         game.finished = True
         return True
+
+#------------------------------------
 
     def history(game, list_of_words, number_of_parameters):
         l = len(list_of_words)
