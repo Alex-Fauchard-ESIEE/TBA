@@ -8,6 +8,7 @@ from command import Command
 from actions import Actions
 from item import Item
 from character import Character
+from lines import get_lines
 
 class Game:
 
@@ -141,14 +142,15 @@ class Game:
         # Setup player and starting room
 
         self.player = Player(input("\nEntrez votre nom: "))
-        #exits = [value.name for value in list(rue.exits.values()) if value != None] #test
-        #print(exits) #test
-        #a = list(rue.exits.values()) #test
-        #print(a, a[1].name, type(a[1])) #test
+        #exits = [value.name for value in list(rue.exits.values()) if value != None] # test
+        #print(exits) # test
+        #a = list(rue.exits.values()) # test
+        #print(a, a[1].name, type(a[1])) # test
         self.player.current_room = rue
         self.player.inventory = {}
         self.player.character = {}
 
+    # Beginning of history
 
     # Play the game
     def play(self):
@@ -178,9 +180,7 @@ class Game:
 
     # Print the welcome message
     def print_welcome(self):
-        print(f"\nBienvenue {self.player.name} dans ce jeu d'aventure !")
-        print("Entrez 'help' si vous avez besoin d'aide.")
-        #
+        get_lines(1)
         print(self.player.current_room.get_long_description())
     
 

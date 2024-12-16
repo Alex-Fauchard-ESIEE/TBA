@@ -89,7 +89,7 @@ class Actions:
                     if temp != ach.current_room :
                         del temp.characters[char]
                         ach.current_room.characters[char] = ach
-                #print(char, ":",ach.current_room.name) # test
+                print(char, ":",ach.current_room.name) # test
         else :
             print(MSG2.format(direction=list_of_words[1]))
         return True
