@@ -142,6 +142,7 @@ class Game:
         sherif.characters["BOB"] = BOB
         RECEPTIONNISTE = Character("Réceptionniste", 'un petit gars banal', hotel, ["Je n'ai malheureusement pas de chambres disponibles"], 0)
         hotel.characters["RECEPTIONNISTE"] = RECEPTIONNISTE
+        SHERIF = Character("Shérif", sherif, ["Bonjour, comment allez vous?"])
 
         # Setup the dict of all characters
 
