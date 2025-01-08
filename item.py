@@ -1,11 +1,11 @@
 class Item:
     
-    def __init__(self, name, description, weight):
+    def __init__(self, name, description, quantity):
         self.name = name
         self.description =  description
-        self.weight = weight
+        self.quantity = quantity
     
 #------------------------------------
 
     def __str__(self):
-        return f"{self.name} : {self.description} ({self.weight} kg)"
+        return f"{self.quantity}x {self.name} : {self.description}"

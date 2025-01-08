@@ -82,6 +82,6 @@ class Player():
         
         result = "\nVous disposez des items suivants :\n"
         for item in self.inventory.values():
-            result += f"    - {item.name} : {item.description} ({item.weight} kg)\n"
+            result += f"    - {item.quantity}x {item.name} : {item.description}\n"
         return result
         
