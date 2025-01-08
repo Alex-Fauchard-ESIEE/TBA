@@ -8,7 +8,7 @@ from command import Command
 from actions import Actions
 from item import Item
 from character import Character
-from lines import get_lines
+from lines import get_lines, vie
 
 class Game:
 
@@ -118,11 +118,20 @@ class Game:
 
         # Setup items for rooms
 
-        EPEE = Item("épée", "une épée au fil tranchant comme un rasoir", 2)
+        EPEE = Item("épée", "une épée au fil tranchant comme un rasoir", 1)
         rue.inventory["EPEE"] = EPEE
+        COLLIER = Item("Morceau de collier", "C'est un morceau du collier que j'avais offert à Bonnie lors de notre rencontre", 1)
+        chambre2.inventory["COLLIER"] = COLLIER
+        COLLIER = Item("Morceau de collier", "C'est un morceau du collier que j'avais offert à Bonnie lors de notre rencontre", 1)
+        sherif.inventory["COLLIER"] = COLLIER
+        COLLIER = Item("Morceau de collier", "C'est un morceau du collier que j'avais offert à Bonnie lors de notre rencontre", 1)
+        kapry.inventory["COLLIER"] = COLLIER
+        COLLIER = Item("Morceau de collier", "C'est un morceau du collier que j'avais offert à Bonnie lors de notre rencontre", 1)
+        minto.inventory["COLLIER"] = COLLIER
+        COLLIER = Item("Morceau de collier", "C'est un morceau du collier que j'avais offert à Bonnie lors de notre rencontre", 1)
+        jafar.inventory["COLLIER"] = COLLIER
 
         # Setup PNJs for rooms 
-
     
         # Le dernier paramètre est pour savoir si le personnage peut changer de pièce ( 0 -> immobile)
         GANDALF = Character("Gandalf", "un magicien blanc", rue, ["Abracadabra !", "Bizzzzz"], 1)
@@ -163,6 +172,8 @@ class Game:
         while not self.finished:
             # Get the command from the player
             self.process_command(input("> "))
+            if len(vie) != 0 : 
+                self.finished = True
         return None
 
     # Process the command entered by the player
