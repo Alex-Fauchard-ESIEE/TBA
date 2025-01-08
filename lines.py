@@ -23,7 +23,7 @@ Mon tout a beaucoup de travail le jour de la Saint-Valentin.""")
 Alors quel genre d’avenir êtes-vous venu chercher ? \nJar Jar Binks : Hmm je vois, tu es Clyde le célèbre tueur à gage. Je peux t’aider à obtenir ce que tu cherches pour te consoler. Mais il faudra répondre à l’énigme suivante : 
 
 Considère la suite de chiffres suivante : 0 1 1 2 3 5 8 
-Quel chiffre suit le 8 ?"""), "Clyde : Chaque nouveau chiffre est le résultat de l’addition des deux précédents. 0 + 1 = 1 / 1 + 1 = 2 / 1 + 2 = 3 etc, donc 5 + 8 = 13.", ("\nJar Jar Binks : Bonne réponse, je garde cette pièce de ton collier dans un coffre fort bien scellé. Pour le récupérer, tu devras jouer à 2 jeux de stratégie contre un maître. Si tu gagnes, le maître te donnera une des mes bagues. Si tu me l’apportes, le collier est à toi.")]] 
+Quel chiffre suit le 8 ?"""), "13", ("\nChaque nouveau chiffre est le résultat de l’addition des deux précédents. 0 + 1 = 1 / 1 + 1 = 2 / 1 + 2 = 3 etc, donc 5 + 8\n \nJar Jar Binks : Bonne réponse, je garde cette pièce de ton collier dans un coffre fort bien scellé. Pour le récupérer, tu devras jouer à 2 jeux de stratégie contre un maître. Si tu gagnes, le maître te donnera une des mes bagues. Si tu me l’apportes, le collier est à toi. ")]] 
 }
 def get_lines(name , number=-1) :
     '''Permet d'obtenir les dialogues du jeu'''
