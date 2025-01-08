@@ -123,14 +123,16 @@ class Game:
 
         # Setup PNJs for rooms 
 
-        # Pour les phrases, on met un 0 si le personnage ne dit rien
-        # Le dernier paramètre est pour savoir si le personnage peut changer de pièce
+    
+        # Le dernier paramètre est pour savoir si le personnage peut changer de pièce ( 0 -> immobile)
         GANDALF = Character("Gandalf", "un magicien blanc", rue, ["Abracadabra !", "Bizzzzz"], 1)
         rue.characters["GANDALF"] = GANDALF
         PATATE = Character("Patate", "une magnifique patate", rue, [], 0)
         rue.characters["PATATE"] = PATATE
         BOB = Character("Bob", "simplement une éponge", sherif, ["Patriiiiiick"], 1)
         sherif.characters["BOB"] = BOB
+        RECEPTIONNISTE = Character("Réceptionniste", 'un petit gars banal', hotel, ["Je n'ai malheureusement pas de chambres disponibles"], 0)
+        hotel.characters["RECEPTIONNISTE"] = RECEPTIONNISTE
 
         # Setup the dict of all characters
 
@@ -142,11 +144,12 @@ class Game:
         # Setup player and starting room
 
         self.player = Player(input("\nEntrez votre nom: "))
+        Player.name = self.player
         #exits = [value.name for value in list(rue.exits.values()) if value != None] # test
         #print(exits) # test
         #a = list(rue.exits.values()) # test
         #print(a, a[1].name, type(a[1])) # test
-        self.player.current_room = rue
+        self.player.current_room = hotel
         self.player.inventory = {}
         self.player.character = {}
 
@@ -180,7 +183,9 @@ class Game:
 
     # Print the welcome message
     def print_welcome(self):
-        get_lines(1)
+        print("\nEntrez 'help' si vous avez besoin d'aide.")
+        print(f"\n\n{self.player.name} posons le contexte :\n")
+        get_lines('prologue', 0)
         print(self.player.current_room.get_long_description())
     
 

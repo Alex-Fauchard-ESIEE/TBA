@@ -37,7 +37,10 @@ class Player():
         self.inventory = {}
       
 #------------------------------------
-  
+    #Define get_name
+    def get_name(self):
+        return f'self.name'
+#------------------------------------
     # Define get_history
     def get_history(self):
         history = "\nVous avez déjà visité les pièces suivantes:\n"

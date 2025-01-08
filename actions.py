@@ -1,3 +1,5 @@
+from lines import get_lines
+from lines import dialogues
 # Description: The actions module.
 
 # The actions module contains the functions that are called when a command is executed.
@@ -15,9 +17,10 @@
 MSG0 = "\nLa commande '{command_word}' ne prend pas de paramètre.\n"
 # The MSG1 variable is used when the command takes 1 parameter.
 MSG1 = "\nLa commande '{command_word}' prend 1 seul paramètre.\n"
-# 
+# The MSG2 variable is used when the direction doesn't exist.
 MSG2 = "\nLa direction '{direction}' n'existe pas.\n"
-
+# The npc_spe dict is for npc with special speeches.
+npc_spe = {'RECEPTIONNISTE' : 1}
 class Actions:
 
 #------------------------------------
@@ -311,7 +314,10 @@ class Actions:
         player = game.player
         table_remplacement = str.maketrans("ÉÈÀÙÇÊË","EEAUCEE")
         character_recherche = list_of_words[1].upper().translate(table_remplacement).strip()
-        if character_recherche in player.current_room.characters :
+        if character_recherche in npc_spe and npc_spe[character_recherche] != 0 :
+            get_lines(character_recherche, len(dialogues[character_recherche])-npc_spe[character_recherche])
+            npc_spe[character_recherche] -= 1
+        elif character_recherche in player.current_room.characters :
             print(player.current_room.characters[character_recherche].get_msg())
             return True
         else :
