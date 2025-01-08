@@ -19,7 +19,7 @@ Mon deuxième est un oiseau qui aime tout ce qui brille.
 Mon troisième est un talent particulier que l’on peut avoir.
 Mon tout a beaucoup de travail le jour de la Saint-Valentin.""")
 ,"Cupidon",
-"""\nBakou : C’est la bonne réponse tu vas pouvoir être guidé vers la bonne lune et ainsi pouvoir trouver ton collier."""]]
+"""\nBakou : C’est la bonne réponse tu vas pouvoir être guidé vers la bonne lune et ainsi pouvoir trouver ton collier."""]],
 'JAR JAR BINKS' :[[lambda : input("""Jar Jar Binks : Bonsoir jeune voyageur, que viens tu faire dans ma ville ? \nJar Jar Binks : Tiens donc… tout dépend de l’individu mais l’avenir d’un homme peut se trouver soit dans une femme, soit dans le travail mais surement pas dans les jeux d’argent.
 Alors quel genre d’avenir êtes-vous venu chercher ? \nJar Jar Binks : Hmm je vois, tu es Clyde le célèbre tueur à gage. Je peux t’aider à obtenir ce que tu cherches pour te consoler. Mais il faudra répondre à l’énigme suivante : 
 
