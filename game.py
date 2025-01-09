@@ -51,6 +51,7 @@ class Game:
         self.commands["check"] = check
         talk = Command("talk <character>", " : Parler au personnage", Actions.talk, 1)
         self.commands["talk"] = talk
+        direction = Command("direction", "afficher les directions possible et le lieu actuel", Actions.direction, 0)
 
         # Setup rooms
 
@@ -202,15 +203,19 @@ class Game:
             if sum(collier) == 1 :
                 MAILLON = Item("Maillon", "C'est un maillon en or, un morceau du collier que j'avais offert à Bonnie lors de notre rencontre", 1)
                 self.player.inventory["Maillon"] = MAILLON
+                print("ORATEUR @ Vous avez reçu un objet @\n")
             elif sum(collier) == 13 :
-                PERLE = Item("Perle", "C'est encore un morceau du collier que j'avais offert à Bonnie", 1)
-                self.player.inventory["PERLE"] = PERLE
+                PIERRE = Item("Pierre", "C'est encore un morceau du collier que j'avais offert à Bonnie", 1)
+                self.player.inventory["PIERRE"] = PIERRE
+                print("ORATEUR @ Vous avez reçu un objet @\n")
             elif sum(collier) == 50 :
-                MAILLON = Item("Perle", "C'est un maillon en argent, un morceau du collier que j'avais offert à Bonnie lors de notre rencontre", 1)
-                self.player.inventory["Maillon"] = MAILLON
+                CHAINE = Item("Chaîne", "C'est un maillon en argent, un morceau du collier que j'avais offert à Bonnie lors de notre rencontre", 1)
+                self.player.inventory["CHAINE"] = CHAINE
+                print("ORATEUR @ Vous avez reçu un objet @\n")
             elif sum(collier) == 151 :
                 PENDENTIF = Item("Pendentif", "Et voilà la denrière pièce pour reconstituer le collier !", 1)
                 self.player.inventory["PENDENTIF"] = PENDENTIF
+                print("ORATEUR @ Vous avez reçu un objet @\n")
                 get_lines('fin', 0)
                 self.finished = True
             if len(vie) != 0 : 

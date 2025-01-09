@@ -15,9 +15,9 @@ Mais voilà qu'après plusieurs jours à galoper sans arrêt, vous décidez de v
 
 Clyde : Ce petit hôtel fera très bien l'affaire pour me reposer"""],
 'fin' :
-["""Soudain, Clyde vit apparaître Bonnie devant lui, il pleura et voulut la serrer fort dans ses bras mais elle 
+["""\nSoudain, Clyde vit apparaître Bonnie devant lui, il pleura et voulut la serrer fort dans ses bras mais elle 
 disparut. Il se réveilla en sursaut dans la chambre et comprit alors qu’il avait rêvé et que Bonnie avait bel et
-bien disparu…"""],
+bien disparu…\n"""],
 'RECEPTIONNISTE' : 
 [[lambda : input("\nRéceptionniste : Qu’est ce qui est plus grand que la Tour Eiffel, mais infiniment moins lourd ?\n"),
 "SON OMBRE", "\nBravo ! Voici la clé de votre chambre, elle est à l'étage."]],
