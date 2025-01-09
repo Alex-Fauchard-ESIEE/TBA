@@ -20,7 +20,7 @@ MSG1 = "\nLa commande '{command_word}' prend 1 seul paramètre.\n"
 # The MSG2 variable is used when the direction doesn't exist.
 MSG2 = "\nLa direction '{direction}' n'existe pas.\n"
 # The npc_spe dict is for npc with special speeches.
-npc_spe = {'RECEPTIONNISTE' : 1}
+npc_spe = {'RECEPTIONNISTE' : 1, 'SHERIF' : 2, 'EXTRATERRESTRE' : 1, 'GARDIEN' : 2, 'BAKOU' : 2, 'JARJARBINKS' : 3}
 class Actions:
 
 #------------------------------------
@@ -92,7 +92,7 @@ class Actions:
                     if temp != ach.current_room :
                         del temp.characters[char]
                         ach.current_room.characters[char] = ach
-                print(char, ":",ach.current_room.name) # test
+                #print(char, ":",ach.current_room.name) # test pour voir si les PNJs bougent
         else :
             print(MSG2.format(direction=list_of_words[1]))
         return True

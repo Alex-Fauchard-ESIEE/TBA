@@ -82,7 +82,7 @@ class Game:
         self.rooms.append(temple)
         pandora = Room("Pandora", "Cette planète peuplée d'humanoide me terrifie, elle est surprenante de par ses constructions originales et son ciel obscur. ")
         self.rooms.append(pandora)
-        jafar = Room("Jafar", 'Cette planète a un paysage plutôt désertique avec de vastes étendue de dunes de sables, on peut apercevoir une grande ville luxueuse appelée "Casino Land"')
+        jafar = Room("Jafar", 'Cette planète a un paysage plutôt désertique avec de vastes étendue de dunes de sables, on peut apercevoir une grande \nville luxueuse appelée "Casino Land"')
         self.rooms.append(jafar)
         minto = Room("Minto", "Ici prospère un calme absolu, le seul bruit que j'entend est celui des vagues qui s'échoue sur cette petite île paradisiaque entourée d'eau, tout comme le reste de la planète ")
         self.rooms.append(minto)
@@ -100,12 +100,12 @@ class Game:
         prison.exits = {"N" : None, "E" : rue, "S" : None, "O" : None, "U" : None, "D" : None}
         chapelle.exits = {"N" : rue, "E" : None, "S" : kapry, "O" : None, "U" : None, "D" : None}
         hotel.exits = {"N" : None, "E" : None, "S" : None, "O" : rue, "U" : etage, "D" : None}
-        etage.exits = {"N" : chambre1, "E" : chambre2, "S" : None, "O" : chambre3, "U" : None, "D" : hotel}
+        etage.exits = {"N" : chambre1, "E" : chambre2, "S" : chambre3, "O" : None, "U" : None, "D" : hotel}
         chambre1.exits = {"N" : None, "E" : None, "S" : etage, "O" : None, "U" : None, "D" : None}
         chambre2.exits = {"N" : None, "E" : None, "S" : None, "O" : etage, "U" : None, "D" : None}
         chambre3.exits = {"N" : etage, "E" : None, "S" : None, "O" : None, "U" : None, "D" : None}
         zany.exits = {"N" : None, "E" : None, "S" : None, "O" : None, "U" : None, "D" : minto}
-        litchie.exits = {"N" : None, "E" : None, "S" : None, "O" : None, "U" : None, "D" : minto}
+        litchie.exits = {"N" : None, "E" : None, "S" : None, "O" : None, "U" : minto, "D" : None}
         minto.exits = {"N" : None, "E" : kapry, "S" : None, "O" : jafar, "U" : zany, "D" : litchie}
         kapry.exits = {"N" : None, "E" : pandora, "S" : temple, "O" : minto, "U" : None, "D" : None}
         temple.exits = {"N" : kapry, "E" : None, "S" : None, "O" : None, "U" : None, "D" : None}
@@ -199,21 +199,21 @@ class Game:
         while not self.finished:
             # Get the command from the player
             self.process_command(input("> "))
-            if len(vie) != 0 : 
-                self.finished = True
-            elif sum(collier) == 1 :
+            if sum(collier) == 1 :
                 MAILLON = Item("Maillon", "C'est un maillon en or, un morceau du collier que j'avais offert à Bonnie lors de notre rencontre", 1)
-                Player.inventory["Maillon"] = MAILLON
+                self.player.inventory["Maillon"] = MAILLON
             elif sum(collier) == 13 :
                 PERLE = Item("Perle", "C'est encore un morceau du collier que j'avais offert à Bonnie", 1)
-                Player.inventory["PERLE"] = PERLE
+                self.player.inventory["PERLE"] = PERLE
             elif sum(collier) == 50 :
                 MAILLON = Item("Perle", "C'est un maillon en argent, un morceau du collier que j'avais offert à Bonnie lors de notre rencontre", 1)
-                Player.inventory["Maillon"] = MAILLON
+                self.player.inventory["Maillon"] = MAILLON
             elif sum(collier) == 151 :
                 PENDENTIF = Item("Pendentif", "Et voilà la denrière pièce pour reconstituer le collier !", 1)
-                Player.inventory["PENDENTIF"] = PENDENTIF
+                self.player.inventory["PENDENTIF"] = PENDENTIF
                 get_lines('fin', 0)
+                self.finished = True
+            if len(vie) != 0 : 
                 self.finished = True
         return None
 
