@@ -71,10 +71,16 @@ class Room:
   
     # Return a string describing the room's exits.
     def get_exit_string(self):
-        exit_string = "Sortie(s) : " 
+        pluriel = 0
+        exit_string = "" 
         for exit in self.exits.keys():
             if self.exits.get(exit) is not None:
-                exit_string += exit + ", "
+                pluriel += 1
+                exit_string += exit + " (" + self.exits.get(exit).name + ")" + ", "
+        if pluriel >= 2 :
+            exit_string = "Sorties : " + exit_string
+        else :
+            exit_string = "Sortie : " + exit_string         
         exit_string = exit_string.strip(", ")
         return exit_string
     
@@ -82,7 +88,7 @@ class Room:
 
     # Return a long description of this room including exits.
     def get_long_description(self):
-        return f"\n{self.description}\n\n{self.get_exit_string()}\n"
+        return f"\n{self.description}\n\nPosition actuelle : {self.name}\n\n{self.get_exit_string()}\n"
     
 #------------------------------------
 

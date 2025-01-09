@@ -51,7 +51,6 @@ class Game:
         self.commands["check"] = check
         talk = Command("talk <character>", " : Parler au personnage", Actions.talk, 1)
         self.commands["talk"] = talk
-        direction = Command("direction", "afficher les directions possible et le lieu actuel", Actions.direction, 0)
 
         # Setup rooms
 
