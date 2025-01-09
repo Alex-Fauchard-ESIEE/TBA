@@ -58,8 +58,8 @@ class Game:
         self.rooms.append(rue)
         saloon = Room("Saloon", "Ce bon vieux saloon ne m'est plus accessible car le gérant m'a viré.")
         self.rooms.append(saloon)
-        sherif = Room("Bureau du shérif", "Le shérif est toujours là, histoire de veiller sur cette charmante petite ville.")
-        self.rooms.append(sherif)
+        prison = Room("Bureau du shérif", "Le shérif est toujours là, histoire de veiller sur cette charmante petite ville.")
+        self.rooms.append(prison)
         chapelle = Room("Chapelle", "La chappelle est calme, je vois un hôtel au fond et un confessionnal à ma gauche.")
         self.rooms.append(chapelle)
         hotel = Room("Hotel", "Je suis dans l'entrée de l'hôtel, un réceptionniste me fait face derrière le comptoir et je vois un escalier au fond.")
@@ -95,9 +95,9 @@ class Game:
 
         # Create exits for rooms
 
-        rue.exits = {"N" : saloon, "E" : hotel, "S" : chapelle, "O" : sherif, "U" : None, "D" : None}
+        rue.exits = {"N" : saloon, "E" : hotel, "S" : chapelle, "O" : prison, "U" : None, "D" : None}
         saloon.exits = {"N" : None, "E" : None, "S" : rue, "O" : None, "U" : None, "D" : None}
-        sherif.exits = {"N" : None, "E" : rue, "S" : None, "O" : None, "U" : None, "D" : None}
+        prison.exits = {"N" : None, "E" : rue, "S" : None, "O" : None, "U" : None, "D" : None}
         chapelle.exits = {"N" : rue, "E" : None, "S" : kapry, "O" : None, "U" : None, "D" : None}
         hotel.exits = {"N" : None, "E" : None, "S" : None, "O" : rue, "U" : etage, "D" : None}
         etage.exits = {"N" : chambre1, "E" : chambre2, "S" : None, "O" : chambre3, "U" : None, "D" : hotel}
@@ -126,29 +126,29 @@ class Game:
         hotel.inventory["EPEE"] = EPEE
         PERLE = Item("Perle", "C'est un morceau du collier que j'avais offert à Bonnie lors de notre rencontre", 1)
         chambre2.inventory["PERLE"] = PERLE
-        PERLE = Item("Perle", "C'est un morceau du collier que j'avais offert à Bonnie lors de notre rencontre", 1)
-        sherif.inventory["PERLE"] = PERLE
-        PERLE = Item("Perle", "C'est un morceau du collier que j'avais offert à Bonnie lors de notre rencontre", 1)
-        kapry.inventory["PERLE"] = PERLE
-        PERLE = Item("Perle", "C'est un morceau du collier que j'avais offert à Bonnie lors de notre rencontre", 1)
-        minto.inventory["PERLE"] = PERLE
-        PERLE = Item("Perle", "C'est un morceau du collier que j'avais offert à Bonnie lors de notre rencontre", 1)
-        jafar.inventory["PERLE"] = PERLE
+        # MAILLON = Item("Maillon", "C'est un maillon en or, un morceau du collier que j'avais offert à Bonnie lors de notre rencontre", 1)
+        # sherif.inventory["Maillon"] = MAILLON
+        # MAILLON = Item("Perle", "C'est un maillon en argent, un morceau du collier que j'avais offert à Bonnie lors de notre rencontre", 1)
+        # minto.inventory["Maillon"] = MAILLON
+        # PERLE = Item("Perle", "C'est encore un morceau du collier que j'avais offert à Bonnie", 1)
+        # kapry.inventory["PERLE"] = PERLE
+        # PENDENTIF = Item("PENDENTIF", "Et voilà la denrière pièce pour reconstituer le collier !", 1)
+        # jafar.inventory["PENDENTIF"] = PENDENTIF
 
         # Setup PNJs for rooms 
-        # Setup the dict of all characters    
-
+        # Setup the dict of all characters
         # Le dernier paramètre est pour savoir si le personnage peut changer de pièce ( 0 -> immobile)
+
         GANDALF = Character("Gandalf", "un magicien blanc", rue, ["Abracadabra !", "Bizzzzz"], 1)
         rue.characters["GANDALF"] = GANDALF
         PATATE = Character("Patate", "une magnifique patate", rue, [], 0)
         rue.characters["PATATE"] = PATATE
-        BOB = Character("Bob", "simplement une éponge", sherif, ["Patriiiiiick"], 1)
-        sherif.characters["BOB"] = BOB
-        RECEPTIONNISTE = Character("Réceptionniste", 'un petit gars banal', hotel, ["Je n'ai malheureusement pas de chambres disponibles"], 0)
+        BOB = Character("Bob", "simplement une éponge", prison, ["Patriiiiiick"], 1)
+        prison.characters["BOB"] = BOB
+        RECEPTIONNISTE = Character("Réceptionniste", 'un petit gars banal', hotel, ["Je n'ai malheureusement pas de chambre disponible"], 0)
         hotel.characters["RECEPTIONNISTE"] = RECEPTIONNISTE
-        SHERIF = Character("Shérif", "Le héro qui protège la ville !", sherif, ["Bonjour, comment allez vous ?"], 0)
-        sherif.characters["SHERIF"] = SHERIF
+        SHERIF = Character("Shérif", "Le héro qui protège la ville !", prison, ["Je n'ai aucun travail pour vous monsieur"], 0)
+        prison.characters["SHERIF"] = SHERIF
         EXTRATERRESTRE = Character("Extraterrestre", "Une créature un peu bizarre mais dont je comprends la langue", kapry, ["..."], 0)
         kapry.characters["EXTRATERRESTRE"] = EXTRATERRESTRE
         GARDIEN = Character("Gardien", "Ce personnage est intimand mais amical", temple, ["Vous ne devriez pas rester ici monsieur"], 0)       
@@ -161,7 +161,17 @@ class Game:
         for r in self.rooms :
             for char in r.characters :
                 self.all_characters[char] = r.characters[char]
-    
+        
+        # Setup inventories for PNJs
+
+        MAILLON = Item("Maillon", "C'est un maillon en or, un morceau du collier que j'avais offert à Bonnie lors de notre rencontre", 1)
+        SHERIF.bag["Maillon"] = MAILLON
+        MAILLON = Item("Perle", "C'est un maillon en argent, un morceau du collier que j'avais offert à Bonnie lors de notre rencontre", 1)
+        BAKOU.bag["Maillon"] = MAILLON
+        PERLE = Item("Perle", "C'est encore un morceau du collier que j'avais offert à Bonnie", 1)
+        EXTRATERRESTRE.bag["PERLE"] = PERLE
+        PENDENTIF = Item("Pendentif", "Et voilà la denrière pièce pour reconstituer le collier !", 1)
+        JARJARBINKS.bag["PENDENTIF"] = PENDENTIF
 
         # Setup player and starting room
 

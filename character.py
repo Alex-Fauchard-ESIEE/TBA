@@ -3,11 +3,13 @@ class Character():
 
     def __init__(self, name, description, current_room, msgs, move_or_not):
         '''
-        move_or_not : peut bouger si il vaut 1'''
+        move_or_not : peut bouger si il vaut 1
+        '''
         self.name = name
         self.description = description
         self.current_room = current_room
         self.msgs = msgs
+        self.bag = {}
         self.move_or_not = move_or_not
 
 #------------------------------------
