@@ -9,7 +9,7 @@ from command import Command
 from actions import Actions
 from item import Item
 from character import Character
-from lines import get_lines, vie
+from lines import get_lines, vie, collier
 
 class Game:
 
@@ -163,16 +163,20 @@ class Game:
                 self.all_characters[char] = r.characters[char]
         
         # Setup inventories for PNJs
-
+        """
+        # 1
         MAILLON = Item("Maillon", "C'est un maillon en or, un morceau du collier que j'avais offert à Bonnie lors de notre rencontre", 1)
         SHERIF.bag["Maillon"] = MAILLON
+        # 3
         MAILLON = Item("Perle", "C'est un maillon en argent, un morceau du collier que j'avais offert à Bonnie lors de notre rencontre", 1)
         BAKOU.bag["Maillon"] = MAILLON
+        # 2
         PERLE = Item("Perle", "C'est encore un morceau du collier que j'avais offert à Bonnie", 1)
         EXTRATERRESTRE.bag["PERLE"] = PERLE
+        #4
         PENDENTIF = Item("Pendentif", "Et voilà la denrière pièce pour reconstituer le collier !", 1)
         JARJARBINKS.bag["PENDENTIF"] = PENDENTIF
-
+        """
         # Setup player and starting room
 
         self.player = Player(input("\nEntrez votre nom: "))
@@ -196,6 +200,20 @@ class Game:
             # Get the command from the player
             self.process_command(input("> "))
             if len(vie) != 0 : 
+                self.finished = True
+            elif sum(collier) == 1 :
+                MAILLON = Item("Maillon", "C'est un maillon en or, un morceau du collier que j'avais offert à Bonnie lors de notre rencontre", 1)
+                Player.inventory["Maillon"] = MAILLON
+            elif sum(collier) == 13 :
+                PERLE = Item("Perle", "C'est encore un morceau du collier que j'avais offert à Bonnie", 1)
+                Player.inventory["PERLE"] = PERLE
+            elif sum(collier) == 50 :
+                MAILLON = Item("Perle", "C'est un maillon en argent, un morceau du collier que j'avais offert à Bonnie lors de notre rencontre", 1)
+                Player.inventory["Maillon"] = MAILLON
+            elif sum(collier) == 151 :
+                PENDENTIF = Item("Pendentif", "Et voilà la denrière pièce pour reconstituer le collier !", 1)
+                Player.inventory["PENDENTIF"] = PENDENTIF
+                get_lines('fin', 0)
                 self.finished = True
         return None
 
@@ -221,7 +239,7 @@ class Game:
         print(f"\n\n{self.player.name} posons le contexte :\n")
         get_lines('prologue', 0)
         print(self.player.current_room.get_long_description())
-    
+
 
 def main():
     # Create a game object and play the game

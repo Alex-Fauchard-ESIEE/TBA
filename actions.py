@@ -262,6 +262,7 @@ class Actions:
             player.inventory[obj_recherche] = player.current_room.inventory[obj_recherche]
             print(player.inventory[obj_recherche].name.capitalize(),"est maintenant bien au chaud dans ton inventaire.")
             del player.current_room.inventory[obj_recherche]
+            #print(player.inventory)
             return player.inventory
         else :
             print(list_of_words[1].capitalize() ,"n'est pas dans la pièce.")

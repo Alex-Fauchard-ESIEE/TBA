@@ -46,3 +46,12 @@ class Character():
         else :
             return False
 
+    
+    def give(game, self) :
+            if self.bag == [] :
+                print("--- Si ce message apparaît, une erreur s'est produite --- (give)")
+            else :
+                obj = self.bag[0]
+                game.self = self
+                game.player.inventory[self.bag[0].name] = [self.bag[0]]
+                print(f"Vous avez récupéré : {self.bag[0].name.capitalize()}, dans votre inventaire")

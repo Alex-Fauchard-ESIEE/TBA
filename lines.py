@@ -26,15 +26,15 @@ bien disparu…"""],
 à lui parler.""", 
 [lambda : input("""\nShérif : Bien sûr, mais avant il faudra répondre à l’énigme suivante: Qu'est-ce qui n'est pas 
 vivant mais qui grandit, n'a pas de poumon mais a besoin d'air, et meurt sous l'eau ?"""), 
- "Le feu",("\nShérif : Exact, maintenant tu peux aller voir le prisonnier mais fais attention il mord.")]]
+ "Le feu","\nShérif : Exact, maintenant tu peux aller voir le prisonnier mais fais attention il mord.", 1]]
 ,'EXTRATERRESTRE' :
 ["""\nExtraterrestre : Moi savoir où trouver collier. Collier se trouvait en haut de la colline 
 là bas dans temple, vous avoir besoin de 5h de marche. Mais attention là-bas y avoir gardien du temple dangereux."""],
 'GARDIEN DU TEMPLE' :
 ["""\nGardien du temple : Bonjour étranger, que viens tu faire par ici, ne sais tu pas que c’est dangereux de 
 m’approcher, je garde près de moi des objets d'une valeur inestimable.""", 
-[lambda : input("\nGardien du temple : Qu'est-ce qui t'appartient mais que les autres utilisent plus que toi?"),
-"Mon prénom"]],
+[lambda : input("\nGardien du temple : Qu'est-ce qui t'appartient mais que les autres utilisent plus que toi ?"),
+"Mon prénom", 12]],
 'BAKOU' :
 ["\nBakou : Merci pour ton aide précieuse, en quoi puis-je te venir en aide ?", 
 [lambda : input("""Bakou : Je ne l’ai jamais vu ici, mais par contre je pense que tu peux la trouver sur une des deux 
@@ -45,7 +45,7 @@ Mon premier est une lettre de l’alphabet.
 Mon deuxième est un oiseau qui aime tout ce qui brille.
 Mon troisième est un talent particulier que l’on peut avoir.
 Mon tout a beaucoup de travail le jour de la Saint-Valentin."""), "Cupidon",
-"""\nBakou : C’est la bonne réponse tu vas pouvoir être guidé vers la bonne lune et ainsi pouvoir trouver ton collier."""]],
+"""\nBakou : C’est la bonne réponse tu vas pouvoir être guidé vers la bonne lune et ainsi pouvoir trouver ton collier.""", 37]],
 'JAR JAR BINKS' :
 ["\nJar Jar Binks : Bonsoir jeune voyageur, que viens tu faire dans ma ville ?", 
 """\nJar Jar Binks : Tiens donc… tout dépend de l’individu mais l’avenir d’un homme peut se trouver soit dans une
@@ -56,16 +56,16 @@ tu cherches pour te consoler. Mais il faudra répondre à l’énigme suivante :
 Considère la suite de chiffres suivante : 0 1 1 2 3 5 8
 
 Quel chiffre suit le 8 ?"""), "13",
-("""\nChaque nouveau chiffre est le résultat de l’addition des deux précédents. 
+"""\nChaque nouveau chiffre est le résultat de l’addition des deux précédents. 
 0 + 1 = 1 / 1 + 1 = 2 / 1 + 2 = 3 etc, donc 5 + 8
  
 Jar Jar Binks : Bonne réponse, je garde cette pièce de ton collier dans un coffre fort bien scellé. Pour le récupérer,
 tu devras jouer à 2 jeux de stratégie contre un maître. Si tu gagnes, le maître te donnera une des mes bagues. Si tu
-me l’apportes, le collier est à toi.""")]] 
+me l’apportes, le collier est à toi.""", 101]] 
 }
 
 
-def get_lines(name , number=-1) :
+def get_lines(game, name , number=-1) :
     '''Permet d'obtenir les dialogues du jeu'''
     try:
         if number >= 0:
@@ -81,6 +81,7 @@ def get_lines(name , number=-1) :
                             print(f"\nVotre réponse : {reponse}, est mauvaise, encore {2-i} {pluriel[i]}.")
                         elif reponse_ordi == dialogue[1] :
                            print(dialogue[2])
+                           
                            return True
                     elif reponse_ordi == dialogue[1] :
                         print(dialogue[2])
@@ -93,8 +94,9 @@ def get_lines(name , number=-1) :
                 print(dialogues[name][number])  # Sinon, afficher directement
             return True
         else:
-            print(" --- Si vous voyez ce message, alors une erreur est survenue dans le chargement des dialogues --- ")
+            print("--- Si ce message apparaît, une erreur s'est produite --- (line, dial) ")
             return False
     except KeyError:
-        print(f" --- Le personnage : {name}, n'existe pas dans les dialogues --- ")
+        print(f"--- Si ce message apparaît, une erreur s'est produite --- (line, key) ")
         return False
+
