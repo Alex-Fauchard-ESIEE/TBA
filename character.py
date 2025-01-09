@@ -26,7 +26,6 @@ class Character():
             exits_adj = [value for value in list(self.current_room.exits.values()) if value != None]
             piece_adj = random.choice(exits_adj)
             self.current_room = piece_adj
-            
             return True
         else :
             return False
