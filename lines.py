@@ -8,7 +8,7 @@ Parker, à la suite de celui-ci.\n\n
 Mais voilà qu'après plusieurs jours à galoper sans arrêt, vous décidez de vous arrêter dans la petite ville de LuckyLand.
 \n...\n...\n...\n
 Clyde : Ce petit hôtel fera très bien l'affaire pour me reposer"""], 
-'RECEPTIONNISTE' : [[lambda : input("\nRéceptionniste : Qu’est ce qui est plus grand que la Tour Eiffel, mais infiniment moins lourd ?"), "LA TOUR EIFFEL", "\nBravo !"]],
+'RECEPTIONNISTE' : [[lambda : input("\nRéceptionniste : Qu’est ce qui est plus grand que la Tour Eiffel, mais infiniment moins lourd ?\n"), "LA TOUR EIFFEL", "\nBravo ! Voici la clé de votre chambre, elle est à l'étage."]],
 'SHERIF' : ["\nShérif : Oui, mon cher, je l’ai vu dans la cellule d’un des prisonniers, il passe son temps à le contempler et à lui parler.", [lambda : input("\nShérif : Bien sûr, mais avant il faudra répondre à l’énigme suivante: Qu'est-ce qui n'est pas vivant mais qui grandit, n'a pas de poumon mais a besoin d'air, et meurt sous l'eau ?"), "Le feu",("\nShérif : Exact, maintenant tu peux aller voir le prisonnier mais fais attention il mord.")]]
 ,'EXTRATERRESTRE' : ["\nExtraterrestre : Moi savoir où trouver collier. Collier se trouvait en haut de la colline là bas dans temple, vous avoir besoin de 5h de marche. Mais attention là-bas y avoir gardien du temple dangereux."]
 ,'GARDIEN DU TEMPLE' : ["\nGardien du temple : Bonjour étranger, que viens tu faire par ici, ne sais tu pas que c’est dangereux de m’approcher, je garde près de moi des objets d'une valeur inestimable.", [lambda : input("\nGardien du temple : Qu'est-ce qui t'appartient mais que les autres utilisent plus que toi?"), "Mon prénom"]]
@@ -29,20 +29,26 @@ def get_lines(name , number=-1) :
     '''Permet d'obtenir les dialogues du jeu'''
     try:
         if number >= 0:
+            pluriel = ["tentatives", "tentative"]
+            table_remplacement = str.maketrans("ÉÈÀÙÇÊË","EEAUCEE")
             dialogue = dialogues[name][number]
             if callable(dialogue[0]): # Si la première partie est une fonction (comme lambda, la fonction anonyme)
                 for i in range (3) :
                     reponse = dialogue[0]()  # Appeler la fonction pour déclencher l'input
+                    reponse_ordi = reponse.upper().translate(table_remplacement).strip() # Forme utilisée pour vérifier la réponse
                     if i <= 1 :
-                        if reponse != dialogue[1] :
-                            print(f"\nVotre réponse : {reponse}, est mauvaise, encore {2-i} tentatives.")
-                        elif reponse == dialogue[1] :
-                           print(dialogue[2]) 
-                    elif reponse == dialogue[1] :
+                        if reponse_ordi != dialogue[1] :
+                            print(f"\nVotre réponse : {reponse}, est mauvaise, encore {2-i} {pluriel[i]}.")
+                        elif reponse_ordi == dialogue[1] :
+                           print(dialogue[2])
+                           return True
+                    elif reponse_ordi == dialogue[1] :
                         print(dialogue[2])
+                        return True
                     else :
                         print("\nVous n'êtes plus le bienvenu ici monsieur, au revoir.\n\n\nVous avez perdu...")
                         vie.append(1)
+                        return False
             else:
                 print(dialogues[name][number])  # Sinon, afficher directement
             return True

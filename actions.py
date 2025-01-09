@@ -254,7 +254,6 @@ class Actions:
             command_word = list_of_words[0]
             print(MSG1.format(command_word=command_word))
             return False
-        
         player = game.player
         table_remplacement = str.maketrans("ÉÈÀÙÇÊË","EEAUCEE")
         obj_recherche = list_of_words[1].upper().translate(table_remplacement).strip()

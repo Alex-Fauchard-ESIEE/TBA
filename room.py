@@ -96,7 +96,7 @@ class Room:
         
         result = "\nOn voit :\n"
         for item in self.inventory.values():
-            result += f"    - {item.name} : {item.description} ({item.weight} kg)\n"
+                result += f"    - {item.quantity}x {item.name} : {item.description}\n"
         for character in self.characters.values() :
                 result += f"    - {character.name} : {character.description}\n"
         return result

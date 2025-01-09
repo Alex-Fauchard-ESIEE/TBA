@@ -82,6 +82,9 @@ class Player():
         
         result = "\nVous disposez des items suivants :\n"
         for item in self.inventory.values():
-            result += f"    - {item.quantity}x {item.name} : {item.description}\n"
+            if item.name != "Morceau de collier" :
+                result += f"    - {item.quantity}x {item.name} : {item.description}\n"
+            else :
+                result += f"    - {item.quantity}x {item.name} : {item.description} ({item.quantity}/4)\n"
         return result
         

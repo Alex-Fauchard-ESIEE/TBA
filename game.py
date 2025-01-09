@@ -1,3 +1,4 @@
+
 # Description: Game class
 
 # Import modules
@@ -77,6 +78,8 @@ class Game:
         self.rooms.append(litchie)
         kapry = Room("Kapry", "Ici la fête est partout et les kapryens sont déchaînés, je ne sais pas si je vais rester longtemps. À moins qu'il n'y ait un petit marché pas loin !")
         self.rooms.append(kapry)
+        temple = Room("Temple", "Cet endroit est majestueux et semble cacher de nombreux trésors !")
+        self.rooms.append(temple)
         pandora = Room("Pandora", "Cette planète peuplée d'humanoide me terrifie, elle est surprenante de par ses constructions originales et son ciel obscur. ")
         self.rooms.append(pandora)
         jafar = Room("Jafar", 'Cette planète a un paysage plutôt désertique avec de vastes étendue de dunes de sables, on peut apercevoir une grande ville luxueuse appelée "Casino Land"')
@@ -104,7 +107,8 @@ class Game:
         zany.exits = {"N" : None, "E" : None, "S" : None, "O" : None, "U" : None, "D" : minto}
         litchie.exits = {"N" : None, "E" : None, "S" : None, "O" : None, "U" : None, "D" : minto}
         minto.exits = {"N" : None, "E" : kapry, "S" : None, "O" : jafar, "U" : zany, "D" : litchie}
-        kapry.exits = {"N" : None, "E" : pandora, "S" : None, "O" : minto, "U" : None, "D" : None}
+        kapry.exits = {"N" : None, "E" : pandora, "S" : temple, "O" : minto, "U" : None, "D" : None}
+        temple.exits = {"N" : kapry, "E" : None, "S" : None, "O" : None, "U" : None, "D" : None}
         jafar.exits = {"N" : None, "E" : None, "S" : minto, "O" : None, "U" : pollux, "D" : sid}
         tancoeur.exits = {"N" : None, "E" : None, "S" : None, "O" : None, "U" : None, "D" : pandora}
         sid.exits = {"N" : None, "E" : None, "S" : None, "O" : None, "U" : None, "D" : jafar}
@@ -118,21 +122,22 @@ class Game:
 
         # Setup items for rooms
 
-        EPEE = Item("épée", "une épée au fil tranchant comme un rasoir", 1)
-        rue.inventory["EPEE"] = EPEE
-        COLLIER = Item("Morceau de collier", "C'est un morceau du collier que j'avais offert à Bonnie lors de notre rencontre", 1)
-        chambre2.inventory["COLLIER"] = COLLIER
-        COLLIER = Item("Morceau de collier", "C'est un morceau du collier que j'avais offert à Bonnie lors de notre rencontre", 1)
-        sherif.inventory["COLLIER"] = COLLIER
-        COLLIER = Item("Morceau de collier", "C'est un morceau du collier que j'avais offert à Bonnie lors de notre rencontre", 1)
-        kapry.inventory["COLLIER"] = COLLIER
-        COLLIER = Item("Morceau de collier", "C'est un morceau du collier que j'avais offert à Bonnie lors de notre rencontre", 1)
-        minto.inventory["COLLIER"] = COLLIER
-        COLLIER = Item("Morceau de collier", "C'est un morceau du collier que j'avais offert à Bonnie lors de notre rencontre", 1)
-        jafar.inventory["COLLIER"] = COLLIER
+        EPEE = Item("épée", "une épée au fil tranchant comme un rasoir", 3)
+        hotel.inventory["EPEE"] = EPEE
+        PERLE = Item("Perle", "C'est un morceau du collier que j'avais offert à Bonnie lors de notre rencontre", 1)
+        chambre2.inventory["PERLE"] = PERLE
+        PERLE = Item("Perle", "C'est un morceau du collier que j'avais offert à Bonnie lors de notre rencontre", 1)
+        sherif.inventory["PERLE"] = PERLE
+        PERLE = Item("Perle", "C'est un morceau du collier que j'avais offert à Bonnie lors de notre rencontre", 1)
+        kapry.inventory["PERLE"] = PERLE
+        PERLE = Item("Perle", "C'est un morceau du collier que j'avais offert à Bonnie lors de notre rencontre", 1)
+        minto.inventory["PERLE"] = PERLE
+        PERLE = Item("Perle", "C'est un morceau du collier que j'avais offert à Bonnie lors de notre rencontre", 1)
+        jafar.inventory["PERLE"] = PERLE
 
         # Setup PNJs for rooms 
-    
+        # Setup the dict of all characters    
+
         # Le dernier paramètre est pour savoir si le personnage peut changer de pièce ( 0 -> immobile)
         GANDALF = Character("Gandalf", "un magicien blanc", rue, ["Abracadabra !", "Bizzzzz"], 1)
         rue.characters["GANDALF"] = GANDALF
@@ -142,9 +147,16 @@ class Game:
         sherif.characters["BOB"] = BOB
         RECEPTIONNISTE = Character("Réceptionniste", 'un petit gars banal', hotel, ["Je n'ai malheureusement pas de chambres disponibles"], 0)
         hotel.characters["RECEPTIONNISTE"] = RECEPTIONNISTE
-        SHERIF = Character("Shérif", sherif, ["Bonjour, comment allez vous?"])
-
-        # Setup the dict of all characters
+        SHERIF = Character("Shérif", "Le héro qui protège la ville !", sherif, ["Bonjour, comment allez vous ?"], 0)
+        sherif.characters["SHERIF"] = SHERIF
+        EXTRATERRESTRE = Character("Extraterrestre", "Une créature un peu bizarre mais dont je comprends la langue", kapry, ["..."], 0)
+        kapry.characters["EXTRATERRESTRE"] = EXTRATERRESTRE
+        GARDIEN = Character("Gardien", "Ce personnage est intimand mais amical", temple, ["Vous ne devriez pas rester ici monsieur"], 0)       
+        temple.characters["GARDIEN"] = GARDIEN
+        BAKOU = Character("Bakou", "Ce gorille semble être le chef de la tribu, mais il ne parle pas ma langue donc je n'en suis pas sûr", minto, ["..."], 0)
+        minto.characters["BAKOU"] = BAKOU
+        JARJARBINKS = Character("JarJarBinks", "Cette drôle de créature semble tout droit sortie d'un film !", jafar, ["Meesa s'appelle JarJarBinks"], 0)
+        jafar.characters["JARJARBINKS"] = JARJARBINKS
 
         for r in self.rooms :
             for char in r.characters :
