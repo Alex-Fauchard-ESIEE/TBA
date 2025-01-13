@@ -19,7 +19,7 @@ Clyde : Ce petit hôtel fera très bien l'affaire pour me reposer"""],
 disparut. Il se réveilla en sursaut dans la chambre et comprit alors qu’il avait rêvé et que Bonnie avait bel et
 bien disparu…\n"""],
 'RECEPTIONNISTE' : 
-[[lambda : input("\nRéceptionniste : Qu’est ce qui est plus grand que la Tour Eiffel, mais infiniment moins lourd ?\n"),
+["\nDemande la clé d’une chambre au réceptionniste pour obtenir une chambre", [lambda : input("\nRéceptionniste : Qu’est ce qui est plus grand que la Tour Eiffel, mais infiniment moins lourd ?\n"),
 "SON OMBRE", "\nBravo ! Voici la clé de votre chambre, elle est à l'étage."]],
 'SHERIF' :
 ["""\nShérif : Oui, mon cher, je l’ai vu dans la cellule d’un des prisonniers, il passe son temps à le contempler et 
