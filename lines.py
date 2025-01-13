@@ -19,11 +19,10 @@ Clyde : Ce petit hôtel fera très bien l'affaire pour me reposer"""],
 disparut. Il se réveilla en sursaut dans la chambre et comprit alors qu’il avait rêvé et que Bonnie avait bel et
 bien disparu…\n"""],
 'RECEPTIONNISTE' : 
-["\nDemande la clé d’une chambre au réceptionniste pour obtenir une chambre", [lambda : input("\nRéceptionniste : Qu’est ce qui est plus grand que la Tour Eiffel, mais infiniment moins lourd ?\n"),
+[[lambda : input("\nClyde : Bonjour, auriez-vous une chambre de libre ?\n\nRéceptionniste : Bonjour, oui mais avant vous allez devoir me répondre. Qu’est ce qui est plus grand que la Tour Eiffel,\n mais infiniment moins lourd ?\n"),
 "SON OMBRE", "\nBravo ! Voici la clé de votre chambre, elle est à l'étage."]],
 'SHERIF' :
-["""\nShérif : Oui, mon cher, je l’ai vu dans la cellule d’un des prisonniers, il passe son temps à le contempler et 
-à lui parler.""", 
+["""\nShérif : Oui, mon cher, je l’ai vu dans la cellule d’un des prisonniers, il passe son temps à le contempler et à lui parler.""", 
 [lambda : input("""\nShérif : Bien sûr, mais avant il faudra répondre à l’énigme suivante: Qu'est-ce qui n'est pas 
 vivant mais qui grandit, n'a pas de poumon mais a besoin d'air, et meurt sous l'eau ?\n"""), 
  "LE FEU","\nShérif : Exact, maintenant tu peux aller voir le prisonnier mais fais attention il mord.", 1]]
@@ -48,9 +47,12 @@ Mon tout a beaucoup de travail le jour de la Saint-Valentin.\n"""), "CUPIDON",
 """\nBakou : C’est la bonne réponse tu vas pouvoir être guidé vers la bonne lune et ainsi pouvoir trouver ton collier.""",
 37]],
 'JARJARBINKS' :
-["\nJar Jar Binks : Bonsoir jeune voyageur, que viens tu faire dans ma ville ?", 
+["\nJar Jar Binks : Bonsoir jeune voyageur, que viens tu faire dans ma ville ?\n\nClyde : Je suis à la recherche de mon avenir.", 
 """\nJar Jar Binks : Tiens donc… tout dépend de l’individu mais l’avenir d’un homme peut se trouver soit dans une
-femme, soit dans le travail mais surement pas dans les jeux d’argent. Alors quel genre d’avenir êtes-vous venu chercher ?""",
+femme, soit dans le travail mais surement pas dans les jeux d’argent. Alors quel genre d’avenir êtes-vous venu chercher ?
+
+Clyde : Je suis à la recherche du dernier morceau de collier de ma femme disparue, Bonnie.
+""",
 [lambda : input("""Jar Jar Binks : Hmm je vois, tu es Clyde le célèbre tueur à gage. Je peux t’aider à obtenir ce que 
 tu cherches pour te consoler. Mais il faudra répondre à l’énigme suivante : 
 

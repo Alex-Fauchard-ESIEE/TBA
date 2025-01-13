@@ -11,6 +11,10 @@ from item import Item
 from character import Character
 from lines import get_lines, vie, collier
 
+
+# Constantes pqui déclenches des évènements :
+gin = 1
+ivre = 1
 class Game:
 
     # Constructor
@@ -219,6 +223,15 @@ class Game:
                 self.finished = True
             if len(vie) != 0 : 
                 self.finished = True
+            if self.player.current_room == Room.chambre1 and gin == 1 :
+                get_lines('Perle', 0)
+                gin = 0
+            if self.player.current_room == Room.chambre1 and ivre == 1 and Item.perle in self.player.invetory :
+                get_lines('Bar', 0)
+                self.player.current_room = Room.rue
+                ivre = 0
+                print(self.player.current_room.get_long_description())
+
         return None
 
     # Process the command entered by the player
