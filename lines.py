@@ -18,12 +18,22 @@ Clyde : Ce petit hôtel fera très bien l'affaire pour me reposer"""],
 ["""\nSoudain, Clyde vit apparaître Bonnie devant lui, il pleura et voulut la serrer fort dans ses bras mais elle 
 disparut. Il se réveilla en sursaut dans la chambre et comprit alors qu’il avait rêvé et que Bonnie avait bel et
 bien disparu…\n"""],
+'Perle' :
+["""\nClyde : Maintenant, je vais aller siroter un gin dans ma chambre pour me déshydrater ! 
+
+Clyde s’endort. 
+Au réveil, il voit quelque chose de brillant dans le meuble et ouvre.
+
+Clyde : Mais je reconnais ce morceau de collier abimé, c’est celui de Bonnie ! Si seulement je n'avais pas perdu Bonnie pendant ce braquage de 2nde zone…
+
+D’une mine triste et désemparée, Clyde alla au saloon d’en face et bu jusqu’à l’aube.
+Il se réveilla complètement ivre et dit : Mais que fais-je au milieu de la rue alors que j’étais au saloon ?
+Je vais trouver le reste du collier pour retrouver Bonnie !"""],
 'RECEPTIONNISTE' : 
 ["\nDemande la clé d’une chambre au réceptionniste pour obtenir une chambre", [lambda : input("\nRéceptionniste : Qu’est ce qui est plus grand que la Tour Eiffel, mais infiniment moins lourd ?\n"),
 "SON OMBRE", "\nBravo ! Voici la clé de votre chambre, elle est à l'étage."]],
 'SHERIF' :
-["""\nShérif : Oui, mon cher, je l’ai vu dans la cellule d’un des prisonniers, il passe son temps à le contempler et 
-à lui parler.""", 
+["\nShérif : Oui, mon cher, je l’ai vu dans la cellule d’un des prisonniers, il passe son temps à le contempler et à lui parler."
 [lambda : input("""\nShérif : Bien sûr, mais avant il faudra répondre à l’énigme suivante: Qu'est-ce qui n'est pas 
 vivant mais qui grandit, n'a pas de poumon mais a besoin d'air, et meurt sous l'eau ?\n"""), 
  "LE FEU","\nShérif : Exact, maintenant tu peux aller voir le prisonnier mais fais attention il mord.", 1]]
