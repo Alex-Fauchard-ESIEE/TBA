@@ -205,7 +205,7 @@ class Game:
             self.process_command(input("> "))
             if sum(collier) == 1 :
                 MAILLON = Item("Maillon", "C'est un maillon en or, un morceau du collier que j'avais offert à Bonnie lors de notre rencontre", 1)
-                self.player.inventory["Maillon"] = MAILLON
+                self.player.inventory["MAILLON"] = MAILLON
                 print("ORATEUR @ Vous avez reçu un objet @\n")
             elif sum(collier) == 13 :
                 PIERRE = Item("Pierre", "C'est encore un morceau du collier que j'avais offert à Bonnie", 1)
