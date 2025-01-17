@@ -27,7 +27,7 @@ bien disparu…\n"""],
 ...
 ...
 
-Au réveil, vous voyez quelque chose de brillant dans le meuble.   @
+Au réveil, vous voyez quelque chose de brillant dans le meuble. @
 
 Clyde : Mais je reconnais ce morceau de collier abimé, c’est celui de Bonnie ! Si seulement je n'avais pas perdu Bonnie pendant ce braquage de 2nde zone…"""],
 
@@ -62,10 +62,6 @@ Ahhh voilà des panneaux, je suis donc sur la planète Kapry, et apparemment les
 Bonjour Monsieur, je cherche un morceau de collier qui ressemblerait à celui là.""", 
 """\nExtraterrestre : Moi savoir où trouver collier. Collier se trouvait en haut de la colline là bas dans temple, vous avoir besoin de 5h de marche. Mais attention là-bas y avoir gardien du temple dangereux.""",
 "\n@ Peu après l'explication de l’extraterrestre fort aimable, vous vous mettez à marcher en direction du sommet de la colline jusqu’à atteindre le temple et par conséquent le gardien. @"],
-["\nShérif : Oui, mon cher, je l’ai vu dans la cellule d’un des prisonniers, il passe son temps à le contempler et à lui parler.",
-[lambda : input("""\nShérif : Bien sûr, mais avant il faudra répondre à l’énigme suivante: Qu'est-ce qui n'est pas 
-vivant mais qui grandit, n'a pas de poumon mais a besoin d'air, et meurt sous l'eau ?\n"""), 
- "LE FEU","\nShérif : Exact, maintenant tu peux aller voir le prisonnier mais fais attention il mord.", 1]]
 ,'EXTRATERRESTRE' :
 ["""\nExtraterrestre : Moi savoir où trouver collier. Collier se trouvait en haut de la colline 
 là bas dans temple, vous avoir besoin de 5h de marche. Mais attention là-bas y avoir gardien du temple dangereux."""],
