@@ -25,7 +25,8 @@ class Actions:
 
 #------------------------------------
 # Prise en compte de la commande vide
-
+    
+    @staticmethod # ajouter partout
     def nothing(game, list_of_words, number_of_parameters):
         player = game.player
         l = len(list_of_words)
@@ -37,6 +38,7 @@ class Actions:
 
 #------------------------------------
 
+    @staticmethod
     def go(game, list_of_words, number_of_parameters):
         """
         Move the player in the direction specified by the parameter.
@@ -98,7 +100,8 @@ class Actions:
         return True
     
 #------------------------------------
-
+    
+    @staticmethod
     def quit(game, list_of_words, number_of_parameters):
         """
         Quit the game.
@@ -139,7 +142,8 @@ class Actions:
         return True
 
 #------------------------------------
-
+    
+    @staticmethod
     def history(game, list_of_words, number_of_parameters):
         l = len(list_of_words)
         # If the number of parameters is incorrect, print an error message and return False.
@@ -153,7 +157,8 @@ class Actions:
         return True
     
 #------------------------------------
-
+    
+    @staticmethod
     def back(game, list_of_words, number_of_parameters):
         l = len(list_of_words)
         # If the number of parameters is incorrect, print an error message and return False.
@@ -178,7 +183,8 @@ class Actions:
         return None
       
 #------------------------------------
-  
+    
+    @staticmethod
     def inventory(game, list_of_words, number_of_parameters):
         l = len(list_of_words)
         # If the number of parameters is incorrect, print an error message and return False.
@@ -193,6 +199,7 @@ class Actions:
 
 #------------------------------------
 
+    @staticmethod
     def help(game, list_of_words, number_of_parameters):
         """
         Print the list of available commands.
@@ -235,6 +242,7 @@ class Actions:
     
 #------------------------------------
 
+    @staticmethod
     def look(game,list_of_words,number_of_parameters):
         l = len(list_of_words)
         if l != number_of_parameters + 1:
@@ -248,6 +256,7 @@ class Actions:
             
 #------------------------------------
 
+    @staticmethod
     def take(game,list_of_words,number_of_parameters):
         l = len(list_of_words)
         if l != number_of_parameters + 1:
@@ -270,6 +279,7 @@ class Actions:
 
 #------------------------------------
 
+    @staticmethod
     def drop(game,list_of_words,number_of_parameters):
         l = len(list_of_words)
         if l != number_of_parameters + 1:
@@ -282,16 +292,21 @@ class Actions:
         table_remplacement = str.maketrans("ÉÈÀÙÇÊË","EEAUCEE")
         obj_recherche = list_of_words[1].upper().translate(table_remplacement).strip()
         if obj_recherche in player.inventory :
-            player.current_room.inventory[obj_recherche] = player.inventory[obj_recherche]
-            print(player.inventory[obj_recherche].name.capitalize(),"est maintenant sur le sol froid.")
-            del player.inventory[obj_recherche]
-            return player.current_room.inventory
+            if player.inventory[obj_recherche].drop_or_not == 0 :
+                print("Tu ne vas quand même pas jeter ce souvenir...")
+                return True
+            else :
+                player.current_room.inventory[obj_recherche] = player.inventory[obj_recherche]
+                print(player.inventory[obj_recherche].name.capitalize(),"est maintenant sur le sol froid.")
+                del player.inventory[obj_recherche]
+                return True
         else :
             print(list_of_words[1].capitalize() ," n'est pas dans ton inventaire.")
-        return None
+        return False
 
 #------------------------------------
 
+    @staticmethod
     def check(game,list_of_words,number_of_parameters):
         l = len(list_of_words)
         if l != number_of_parameters + 1:
@@ -304,6 +319,7 @@ class Actions:
     
 #------------------------------------
 
+    @staticmethod
     def talk(game,list_of_words,number_of_parameters):
         l = len(list_of_words)
         if l != number_of_parameters + 1:

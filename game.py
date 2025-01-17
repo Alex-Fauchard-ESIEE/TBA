@@ -9,7 +9,7 @@ from command import Command
 from actions import Actions
 from item import Item
 from character import Character
-from lines import get_lines, vie, collier
+from lines import get_lines, vie, collier, tp
 
 
 
@@ -64,7 +64,7 @@ class Game:
         self.rooms.append(saloon)
         prison = Room("Bureau du shérif", "Le shérif est toujours là, histoire de veiller sur cette charmante petite ville.")
         self.rooms.append(prison)
-        chapelle = Room("Chapelle", "La chappelle est calme, je vois un hôtel au fond et un confessionnal à ma gauche.")
+        chapelle = Room("Chapelle", "La chappelle est calme, je vois un hôtel au fond et un confessionnal à ma gauche.", 1)
         self.rooms.append(chapelle)
         hotel = Room("Hotel", "Je suis dans l'entrée de l'hôtel, un réceptionniste me fait face derrière le comptoir et je vois un escalier au fond.")
         self.rooms.append(hotel)
@@ -96,13 +96,15 @@ class Game:
         self.rooms.append(sid)
         tancoeur = Room("Tancoeur","Cette planète semble refusé ma présence, moi qui suit allergique à la désolation, celle-ci est composé de pierres sombres, de montagnes noires et de volcans en activités.")
         self.rooms.append(tancoeur)
+        isoloir = Room("Isoloir", "Petite pièce de la chapelle servant normalement à se recueillir", 1)
+        self.rooms.append(isoloir)
 
         # Create exits for rooms
 
         rue.exits = {"N" : saloon, "E" : hotel, "S" : chapelle, "O" : prison, "U" : None, "D" : None}
         saloon.exits = {"N" : None, "E" : None, "S" : rue, "O" : None, "U" : None, "D" : None}
         prison.exits = {"N" : None, "E" : rue, "S" : None, "O" : None, "U" : None, "D" : None}
-        chapelle.exits = {"N" : rue, "E" : None, "S" : kapry, "O" : None, "U" : None, "D" : None}
+        chapelle.exits = {"N" : rue, "E" : None, "S" : None, "O" : isoloir, "U" : None, "D" : None}
         hotel.exits = {"N" : None, "E" : None, "S" : None, "O" : rue, "U" : etage, "D" : None}
         etage.exits = {"N" : chambre1, "E" : chambre2, "S" : chambre3, "O" : None, "U" : None, "D" : hotel}
         chambre1.exits = {"N" : None, "E" : None, "S" : etage, "O" : None, "U" : None, "D" : None}
@@ -113,11 +115,12 @@ class Game:
         minto.exits = {"N" : None, "E" : kapry, "S" : None, "O" : jafar, "U" : zany, "D" : litchie}
         kapry.exits = {"N" : None, "E" : pandora, "S" : temple, "O" : minto, "U" : None, "D" : None}
         temple.exits = {"N" : kapry, "E" : None, "S" : None, "O" : None, "U" : None, "D" : None}
-        jafar.exits = {"N" : None, "E" : None, "S" : minto, "O" : None, "U" : pollux, "D" : sid}
+        jafar.exits = {"N" : None, "E" : None, "S" : None, "O" : pandora , "U" : pollux, "D" : sid}
         tancoeur.exits = {"N" : None, "E" : None, "S" : None, "O" : None, "U" : None, "D" : pandora}
         sid.exits = {"N" : None, "E" : None, "S" : None, "O" : None, "U" : None, "D" : jafar}
         pollux.exits = {"N" : None, "E" : None, "S" : None, "O" : None, "U" : None, "D" : jafar}
         pandora.exits = {"N" : None, "E" : None, "S" : None, "O" : kapry, "U" : tancoeur, "D" : None}
+        isoloir.exits = {"N" : None, "E" : chapelle, "S" : kapry, "O" : None, "U" : None, "D" : None}
         
         # Setup sets for room's exits
 
@@ -128,7 +131,7 @@ class Game:
 
         EPEE = Item("épée", "une épée au fil tranchant comme un rasoir", 3)
         hotel.inventory["EPEE"] = EPEE
-        PERLE = Item("Perle", "C'est un morceau du collier que j'avais offert à Bonnie lors de notre rencontre", 1)
+        PERLE = Item("Perle", "C'est un morceau du collier que j'avais offert à Bonnie lors de notre rencontre", 1, 0)
         chambre1.inventory["PERLE"] = PERLE
         # MAILLON = Item("Maillon", "C'est un maillon en or, un morceau du collier que j'avais offert à Bonnie lors de notre rencontre", 1)
         # sherif.inventory["Maillon"] = MAILLON
@@ -193,6 +196,7 @@ class Game:
         self.player.inventory = {}
         self.player.character = {}
 
+
     # Beginning of history
 
     # Play the game
@@ -204,23 +208,26 @@ class Game:
             # Get the command from the player
             self.process_command(input("> "))
             #print(self.rooms[6] ,",", self.player.current_room) test
-            print("collier :", collier)
+            print("collier :", collier, "\ntp :", tp)
             if sum(collier) == 1 :
-                MAILLON = Item("Maillon", "C'est un maillon en or, un morceau du collier que j'avais offert à Bonnie lors de notre rencontre", 1)
+                MAILLON = Item("Maillon", "C'est un maillon en or, un morceau du collier que j'avais offert à Bonnie lors de notre rencontre", 1, 0)
                 self.player.inventory["MAILLON"] = MAILLON
-                print("ORATEUR @ Vous avez reçu un objet @\n")
-            elif sum(collier) == 13 :
-                PIERRE = Item("Pierre", "C'est encore un morceau du collier que j'avais offert à Bonnie", 1)
+                print("@ Vous avez reçu un objet @\n")
+                collier.append(1)
+            elif sum(collier) == 14 :
+                PIERRE = Item("Pierre", "C'est encore un morceau du collier que j'avais offert à Bonnie", 1, 0)
                 self.player.inventory["PIERRE"] = PIERRE
                 print("ORATEUR @ Vous avez reçu un objet @\n")
-            elif sum(collier) == 50 :
-                CHAINE = Item("Chaîne", "C'est un maillon en argent, un morceau du collier que j'avais offert à Bonnie lors de notre rencontre", 1)
+                collier.append(1)
+            elif sum(collier) == 51 :
+                CHAINE = Item("Chaîne", "C'est un maillon en argent, un morceau du collier que j'avais offert à Bonnie lors de notre rencontre", 1, 0)
                 self.player.inventory["CHAINE"] = CHAINE
-                print("ORATEUR @ Vous avez reçu un objet @\n")
-            elif sum(collier) == 151 :
-                PENDENTIF = Item("Pendentif", "Et voilà la denrière pièce pour reconstituer le collier !", 1)
+                print("@ Vous avez reçu un objet @\n")
+                collier.append(1)
+            elif sum(collier) == 152 :
+                PENDENTIF = Item("Pendentif", "Et voilà la denrière pièce pour reconstituer le collier !", 1, 0)
                 self.player.inventory["PENDENTIF"] = PENDENTIF
-                print("ORATEUR @ Vous avez reçu un objet @\n")
+                print("@ Vous avez reçu un objet @\n")
                 get_lines('fin', 0)
                 self.finished = True
             if len(vie) != 0 : 
@@ -236,7 +243,10 @@ class Game:
             if self.player.current_room.talk == 1 :
                 get_lines(self.player.current_room.name, 0)
                 self.player.current_room.talk = 0
-
+                if sum(tp) == 1 :
+                    self.player.current_room = self.rooms[11]
+                    print(self.player.current_room.get_long_description())
+                    tp.remove(1)
         return None
 
     # Process the command entered by the player
