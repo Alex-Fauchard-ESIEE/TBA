@@ -12,9 +12,7 @@ from character import Character
 from lines import get_lines, vie, collier
 
 
-# Constantes pqui déclenches des évènements :
-gin = 1
-ivre = 1
+
 class Game:
 
     # Constructor
@@ -25,6 +23,8 @@ class Game:
         self.player = None
         self.sorties_valides = set()
         self.all_characters = {}
+        self.gin = 1
+        self.ivre = 1
     
     # Setup the game
     def setup(self):
@@ -86,9 +86,9 @@ class Game:
         self.rooms.append(temple)
         pandora = Room("Pandora", "Cette planète peuplée d'humanoide me terrifie, elle est surprenante de par ses constructions originales et son ciel obscur. ")
         self.rooms.append(pandora)
-        jafar = Room("Jafar", 'Cette planète a un paysage plutôt désertique avec de vastes étendue de dunes de sables, on peut apercevoir une grande \nville luxueuse appelée "Casino Land"')
+        jafar = Room("Jafar", 'Cette planète a un paysage plutôt désertique avec de vastes étendue de dunes de sables, on peut apercevoir une grande \nville luxueuse appelée "Casino Land"', 1)
         self.rooms.append(jafar)
-        minto = Room("Minto", "Ici prospère un calme absolu, le seul bruit que j'entend est celui des vagues qui s'échoue sur cette petite île paradisiaque entourée d'eau, tout comme le reste de la planète ")
+        minto = Room("Minto", "Ici prospère un calme absolu, le seul bruit que j'entend est celui des vagues qui s'échoue sur cette petite île paradisiaque entourée d'eau, tout comme le reste de la planète ", 0)
         self.rooms.append(minto)
         pollux = Room("Pollux", "Une lune des plus déconcertante chacun de mes pas est un supplice dû aux poils longs et marrons se trouvant sur le sol, ces poils proviennent des nuages")
         self.rooms.append(pollux)
@@ -203,6 +203,7 @@ class Game:
         while not self.finished:
             # Get the command from the player
             self.process_command(input("> "))
+            #print(self.rooms[6] ,",", self.player.current_room) test
             if sum(collier) == 1 :
                 MAILLON = Item("Maillon", "C'est un maillon en or, un morceau du collier que j'avais offert à Bonnie lors de notre rencontre", 1)
                 self.player.inventory["MAILLON"] = MAILLON
@@ -223,14 +224,17 @@ class Game:
                 self.finished = True
             if len(vie) != 0 : 
                 self.finished = True
-            if self.player.current_room == Room.chambre1 and gin == 1 :
+            if self.player.current_room == self.rooms[6] and self.gin == 1 :
                 get_lines('Perle', 0)
-                gin = 0
-            if self.player.current_room == Room.chambre1 and ivre == 1 and Item.perle in self.player.invetory :
+                self.gin = 0
+            if self.player.current_room == self.rooms[6] and self.ivre == 1 and "Perle" in self.player.inventory :
                 get_lines('Bar', 0)
-                self.player.current_room = Room.rue
-                ivre = 0
+                self.player.current_room = self.rue
+                self.ivre = 0
                 print(self.player.current_room.get_long_description())
+            if self.player.current_room.talk == 1 :
+                get_lines(self.player.current_room.name, 0)
+                self.player.current_room.talk = 0
 
         return None
 

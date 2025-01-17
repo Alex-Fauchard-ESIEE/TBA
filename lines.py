@@ -41,7 +41,7 @@ Clyde : Mais que fais-je au milieu de la rue alors que j’étais au saloon ? Je
 [[lambda : input("\nClyde : Bonjour, auriez-vous une chambre de libre ?\n\nRéceptionniste : Bonjour, oui mais avant vous allez devoir me répondre. Qu’est ce qui est plus grand que la Tour Eiffel,\n mais infiniment moins lourd ?\n"),
 "SON OMBRE", "\nBravo ! Voici la clé de votre chambre, elle est à l'étage."]],
 'SHERIF' :
-["\nShérif : Oui, mon cher, je l’ai vu dans la cellule d’un des prisonniers, il passe son temps à le contempler et à lui parler."
+["\nShérif : Oui, mon cher, je l’ai vu dans la cellule d’un des prisonniers, il passe son temps à le contempler et à lui parler.",
 [lambda : input("""\nShérif : Bien sûr, mais avant il faudra répondre à l’énigme suivante: Qu'est-ce qui n'est pas 
 vivant mais qui grandit, n'a pas de poumon mais a besoin d'air, et meurt sous l'eau ?\n"""), 
  "LE FEU","\nShérif : Exact, maintenant tu peux aller voir le prisonnier mais fais attention il mord.", 1]]
@@ -105,13 +105,13 @@ def get_lines(name , number=-1) :
                         elif reponse_ordi == dialogue[1] :
                            print(dialogue[2])
                            if len(dialogue) == 4 :
-                               collier.append(dialogue[3])
+                               collier.append(dialogue[-1])
                                print(f"{collier} , Sommme : {sum(collier)}")
                            return True
                     elif reponse_ordi == dialogue[1] :
                         print(dialogue[2])
                         if len(dialogue) == 4 :
-                            collier.append(dialogue[3])
+                            collier.append(dialogue[-1])
                             print(f"{collier} , Sommme : {sum(collier)}")
                         return True
                     else :
