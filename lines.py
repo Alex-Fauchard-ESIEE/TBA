@@ -21,13 +21,13 @@ bien disparu…\n"""],
 
 'Perle' :
 ["""\nClyde : Maintenant, je vais aller siroter un gin dans ma chambre pour me déshydrater ! 
-@ Vous vous endormez. 
+@ Vous vous endormez @
 
 ...
 ...
 ...
 
-Au réveil, vous voyez quelque chose de brillant dans le meuble. @
+@ Au réveil, vous voyez quelque chose de brillant dans le meuble @
 
 Clyde : Mais je reconnais ce morceau de collier abimé, c’est celui de Bonnie ! Si seulement je n'avais pas perdu Bonnie pendant ce braquage de 2nde zone…"""],
 
@@ -41,12 +41,12 @@ Clyde : Mais que fais-je au milieu de la rue alors que j’étais au saloon ? Je
 [[lambda : input("\nClyde : Bonjour, auriez-vous une chambre de libre ?\n\nRéceptionniste : Bonjour, oui mais avant vous allez devoir me répondre. Qu’est ce qui est plus grand que la Tour Eiffel,\n mais infiniment moins lourd ?\n"),
 "SON OMBRE", "\nBravo ! Voici la clé de votre chambre, elle est à l'étage."]],
 'SHERIF' :
-["\nClyde : Bonjour shérif, savez-vous où est-ce que je peux trouver un morceau de collier similaire à celui-ci ?","\nShérif : Oui, mon cher, je l’ai vu dans la cellule d’un des prisonniers, il passe son temps à le contempler et à lui parler.","\nClyde : Puis-je rendre visite à cet individu ?"
-[lambda : input("""\nShérif : Bien sûr, mais avant il faudra répondre à l’énigme suivante: 
+["\nClyde : Bonjour shérif, savez-vous où est-ce que je peux trouver un morceau de collier similaire à celui-ci ? \n\nShérif : Oui, mon cher, je l’ai vu dans la cellule d’un des prisonniers, il passe son temps à le contempler et à lui parler.",
+[lambda : input("""\nClyde : Puis-je rendre visite à cet individu ?\n\nShérif : Bien sûr, mais avant il faudra répondre à l’énigme suivante: 
 Qu'est-ce qui n'est pas vivant mais qui grandit, n'a pas de poumon mais a besoin d'air, et meurt sous l'eau ?\n"""), 
  "LE FEU","\nShérif : Exact, maintenant tu peux aller voir le prisonnier mais fais attention il mord.","\nClyde : Il va goûter à mes tatanes!","\n@ Vous lui lancer un coup de pied qui l’endort pour quelques temps.@","\nClyde : Mais de toute façon je ne la retrouverai jamais...", 1]],
-'EXTRATERRESTRE' :
-["\nClyde : Tous mes espoirs sont perdus, je vais finir cette bouteille de gin pour oublier puis aller prier…","\nClyde : Je vais m’installer dans le confessionnal pour prier”, 
+'Chappelle' :
+["\nClyde : Tous mes espoirs sont perdus, je vais finir cette bouteille de gin pour oublier puis aller prier…","\nClyde : Je vais m’installer dans le confessionnal pour prier", 
 """\n @ Vous vous endormez 
 ...
 ...
@@ -62,6 +62,10 @@ Ahhh voilà des panneaux, je suis donc sur la planète Kapry, et apparemment les
 Bonjour Monsieur, je cherche un morceau de collier qui ressemblerait à celui là.""", 
 """\nExtraterrestre : Moi savoir où trouver collier. Collier se trouvait en haut de la colline là bas dans temple, vous avoir besoin de 5h de marche. Mais attention là-bas y avoir gardien du temple dangereux.""",
 "\n@ Peu après l'explication de l’extraterrestre fort aimable, vous vous mettez à marcher en direction du sommet de la colline jusqu’à atteindre le temple et par conséquent le gardien. @"],
+["\nShérif : Oui, mon cher, je l’ai vu dans la cellule d’un des prisonniers, il passe son temps à le contempler et à lui parler.",
+[lambda : input("""\nShérif : Bien sûr, mais avant il faudra répondre à l’énigme suivante: Qu'est-ce qui n'est pas 
+vivant mais qui grandit, n'a pas de poumon mais a besoin d'air, et meurt sous l'eau ?\n"""), 
+ "LE FEU","\nShérif : Exact, maintenant tu peux aller voir le prisonnier mais fais attention il mord.", 1]]
 ,'EXTRATERRESTRE' :
 ["""\nExtraterrestre : Moi savoir où trouver collier. Collier se trouvait en haut de la colline 
 là bas dans temple, vous avoir besoin de 5h de marche. Mais attention là-bas y avoir gardien du temple dangereux."""],
@@ -69,10 +73,10 @@ là bas dans temple, vous avoir besoin de 5h de marche. Mais attention là-bas y
 ["""\nGardien du temple : Bonjour étranger, que viens tu faire par ici, ne sais tu pas que c’est dangereux de m’approcher, je garde près de moi des objets d'une valeur inestimable.""",
 "\nClyde: Je sais… oh tout puissant gardien mais je viens quand même demander avec toute ma reconnaissance si vous pouviez me donner la partie du collier qui ressemble à celui dont j’ai trouvé des morceaux.",
 "\n@ Vous racontez au gardien l’histoire émouvante du collier et de Bonnie, le gardien ému vous propose une énigme que vous devez à tout prix réussir pour avoir le collier.@"
-[lambda : input("\nGardien du temple : Qu'est-ce qui t'appartient mais que les autres utilisent plus que toi ?\n"),
+,[lambda : input("\nGardien du temple : Qu'est-ce qui t'appartient mais que les autres utilisent plus que toi ?\n"),
 "MON PRENOM", "Bravo, voilà le morceau de collier comme promis", 12]],
 'Minto' :
-["\n@ Sur Minto, vous faites la rencontre d’une tribu de gorilles sauvage et violente qui ne comprend que les mimes. Vous sympathisez avec leur chef Bakou qui vous emmène chasser la gazelle avec eux. Bakou reconnut les talents de chasse de Clyde.@"]
+["\n@ Sur Minto, vous faites la rencontre d’une tribu de gorilles sauvage et violente qui ne comprend que les mimes. Vous sympathisez avec leur chef Bakou qui vous emmène chasser la gazelle avec eux. Bakou reconnut les talents de chasse de Clyde.@"],
 'BAKOU' :
 ["\nBakou : Merci pour ton aide précieuse, en quoi puis-je te venir en aide ?","\nClyde : Je suis à la recherche de pièces de collier ressemblant à celui-ci. Par hasard, est-ce que tu aurais vu traîner cette pièce quelque part ?",
 [lambda : input("""Bakou : Je ne l’ai jamais vu ici, mais par contre je pense que tu peux la trouver sur une des deux 
@@ -88,7 +92,7 @@ Mon tout a beaucoup de travail le jour de la Saint-Valentin.\n"""), "CUPIDON",
 'Jafar' :
 ["""\n@ Vous êtes guidé par un singe à l’allure fort étrange et vous finissez par arriver sur la lune Litchi, vous y trouvez de la végétation à foison. Au milieu des arbres, vous apercevez un sanctuaire où reposait une partie du collier de Bonnie. 
 Clyde arriva sur Jafar, sur cette planète pleine de dunes de sable, Clyde aperçut une ville Casino Land la ville du jeu. Dans cette ville, on pouvait y trouver toutes sortes d’espèces : des extraterrestres, des singes, des gorilles, des humanoïdes … 
-Clyde s’assit à une table de poker, et fit la connaissance du maître des lieux  : Jar Jar Binks.@"""]
+Clyde s’assit à une table de poker, et fit la connaissance du maître des lieux  : Jar Jar Binks.@"""],
 'JARJARBINKS' :
 ["\nJar Jar Binks : Bonsoir jeune voyageur, que viens tu faire dans ma ville ?\n\nClyde : Je suis à la recherche de mon avenir.", 
 """\nJar Jar Binks : Tiens donc… tout dépend de l’individu mais l’avenir d’un homme peut se trouver soit dans une
@@ -106,7 +110,7 @@ Quel chiffre suit le 8 ?\n"""), "13",
  
 """\nJar Jar Binks : Bonne réponse, je garde cette pièce de ton collier dans un coffre fort bien scellé. Pour le récupérer,
 tu devras jouer à 2 jeux de stratégie contre un maître. Si tu gagnes, le maître te donnera une des mes bagues. Si tu
-me l’apportes, le collier est à toi.""","\nClyde : Je réussirai et je remporterai le dernier bout de collier." 101]] 
+me l’apportes, le collier est à toi.""","\nClyde : Je réussirai et je remporterai le dernier bout de collier.", 101]] 
 }
 
 
@@ -128,13 +132,13 @@ def get_lines(name , number=-1) :
                         elif reponse_ordi == dialogue[1] :
                            print(dialogue[2])
                            if len(dialogue) == 4 :
-                               collier.append(dialogue[-1])
+                               collier.append(dialogue[3])
                                print(f"{collier} , Sommme : {sum(collier)}")
                            return True
                     elif reponse_ordi == dialogue[1] :
                         print(dialogue[2])
                         if len(dialogue) == 4 :
-                            collier.append(dialogue[-1])
+                            collier.append(dialogue[3])
                             print(f"{collier} , Sommme : {sum(collier)}")
                         return True
                     else :

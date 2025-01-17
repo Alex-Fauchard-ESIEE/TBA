@@ -129,7 +129,7 @@ class Game:
         EPEE = Item("épée", "une épée au fil tranchant comme un rasoir", 3)
         hotel.inventory["EPEE"] = EPEE
         PERLE = Item("Perle", "C'est un morceau du collier que j'avais offert à Bonnie lors de notre rencontre", 1)
-        chambre2.inventory["PERLE"] = PERLE
+        chambre1.inventory["PERLE"] = PERLE
         # MAILLON = Item("Maillon", "C'est un maillon en or, un morceau du collier que j'avais offert à Bonnie lors de notre rencontre", 1)
         # sherif.inventory["Maillon"] = MAILLON
         # MAILLON = Item("Perle", "C'est un maillon en argent, un morceau du collier que j'avais offert à Bonnie lors de notre rencontre", 1)
@@ -204,6 +204,7 @@ class Game:
             # Get the command from the player
             self.process_command(input("> "))
             #print(self.rooms[6] ,",", self.player.current_room) test
+            print("collier :", collier)
             if sum(collier) == 1 :
                 MAILLON = Item("Maillon", "C'est un maillon en or, un morceau du collier que j'avais offert à Bonnie lors de notre rencontre", 1)
                 self.player.inventory["MAILLON"] = MAILLON
