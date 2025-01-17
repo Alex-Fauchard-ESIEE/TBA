@@ -11,6 +11,10 @@ from item import Item
 from character import Character
 from lines import get_lines, vie, collier
 
+
+# Constantes pqui déclenches des évènements :
+gin = 1
+ivre = 1
 class Game:
 
     # Constructor
@@ -201,7 +205,7 @@ class Game:
             self.process_command(input("> "))
             if sum(collier) == 1 :
                 MAILLON = Item("Maillon", "C'est un maillon en or, un morceau du collier que j'avais offert à Bonnie lors de notre rencontre", 1)
-                self.player.inventory["Maillon"] = MAILLON
+                self.player.inventory["MAILLON"] = MAILLON
                 print("ORATEUR @ Vous avez reçu un objet @\n")
             elif sum(collier) == 13 :
                 PIERRE = Item("Pierre", "C'est encore un morceau du collier que j'avais offert à Bonnie", 1)
@@ -219,6 +223,15 @@ class Game:
                 self.finished = True
             if len(vie) != 0 : 
                 self.finished = True
+            if self.player.current_room == Room.chambre1 and gin == 1 :
+                get_lines('Perle', 0)
+                gin = 0
+            if self.player.current_room == Room.chambre1 and ivre == 1 and Item.perle in self.player.invetory :
+                get_lines('Bar', 0)
+                self.player.current_room = Room.rue
+                ivre = 0
+                print(self.player.current_room.get_long_description())
+
         return None
 
     # Process the command entered by the player
