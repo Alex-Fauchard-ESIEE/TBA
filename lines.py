@@ -124,4 +124,3 @@ def get_lines(name , number=-1) :
     except KeyError:
         print(f"--- Si ce message apparaît, une erreur s'est produite --- (line, key) ")
         return False
-

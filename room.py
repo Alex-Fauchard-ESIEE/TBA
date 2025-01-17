@@ -12,7 +12,7 @@ class Room:
         exits : les différentes sorties de la pièce
         inventory : 
 
-    Les méthodes de la classe sont :
+    Les méthodes de la classe sont : 
         __init__() : constructeur
         get_exit() : donne les sorties possibles en fonction de la direction donnée
         get_exit_string() : donne une description de la pièce vers laquelle amène la sortie
