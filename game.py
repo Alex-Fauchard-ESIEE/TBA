@@ -238,29 +238,43 @@ celle-ci est composé de pierres sombres, de montagnes noires et de volcans""", 
             self.sorties_valides = self.sorties_valides | set(e.exits.keys())
 
         # Setup items for rooms
-        epee = Item("épée", "une épée au fil tranchant comme un rasoir", 3)
-        hotel.inventory["EPEE"] = epee
+        douilles = Item("Douilles", "Un tas de douilles", 18)
+        rue.inventory["DOUILLES"] = douilles
         perle = Item("Perle",
 "C'est un morceau du collier que j'avais offert à Bonnie lors de notre rencontre", 1, 0)
         chambre1.inventory["PERLE"] = perle
-        caillou = Item("Caillou", "", 1)
-        hotel.inventory["CAILLOU"] = caillou
-        caillou = Item("Caillou", "", 1)
-        chambre2.inventory["CAILLOU"] = caillou
-        caillou = Item("Caillou", "", 1)
-        chambre3.inventory["CAILLOU"] = caillou
+        montre = Item("Montre", "une montre usée", 1)
+        chambre2.inventory["MONTRE"] = montre
+        lunettes = Item("Lunettes", "tout ce qu'il y a de plus banal", 1)
+        chambre2.inventory["LUNETTES"] = lunettes
+        bottes = Item("Bottes", "De véritable bottes de cowboy !", 2)
+        chambre2.inventory["BOTTES"] = bottes
+        draps = Item("Draps", "Des draps pour matelas", 3)
+        chambre3.inventory["DRAPS"] = draps
+        bois = Item("Bois", "Quelques bâtons de bois", 8)
+        chambre2.inventory["BOIS"] = bois
+        cailloux = Item("Cailloux", "Vraiment ??? Tu veux que je décrive des cailloux ?", 37)
+        rue.inventory["CAILLOUX"] = cailloux
+        affiches = Item("Affiches", "Ce sont les affiches des gens recherchés", 3)
+        prison.inventory["AFFICHES"] = affiches
+        bible = Item("Bible", "C'est la bible du prêtre", 1)
+        chapelle.inventory["BIBLE"] = bible
+        crucifix = Item("Crucifix", "On dirait du bronze", 1)
+        chapelle.inventory["CRUCIFIX"] = crucifix
+        pieces = Item("Pieces", "Ça doit être la monnaie sur Jafar", 6)
+        jafar.inventory["PIECES"] = pieces
+        totem = Item("TOTEM", "c'est une pièce du trésor du temple", 1)
+        temple.inventory["TOTEM"] = totem
+        cailloux = Item("Cailloux", "Encore des cailloux, sérieusement ??", 2)
+        zany.inventory["CAILLOUX"] = cailloux
 
         # Setup PNJs for rooms
-        gandalf = Character("Gandalf",
-                        "un magicien blanc",
-                        rue,
-                        ["\n Gandalf : Abracadabra !\n", "\n Gandalf : Bizzzzz\n"], 1, 1)
-        rue.characters["GANDALF"] = gandalf
-        patate = Character("Patate", "\n Patate : une magnifique patate", rue, [], 1, 0)
-        rue.characters["PATATE"] = patate
-        bob = Character("Bob", "simplement une éponge", prison, ["\nBob : Patriiiiiick\n"], 1, 1)
-        prison.characters["BOB"] = bob
-        receptionniste = Character("Réceptionniste", 'un petit gars banal', hotel,
+        alien = Character("Alien", " Un vrai petit bonhommme vert", zany,
+        ["\n Alien : Zougizi dicurta prodo !\n", "\n Alien : Pona mioutu azcho\n"], 1, 0)
+        zany.characters["ALIEN"] = alien
+        bob = Character("Bob", "un gars lambda", rue, ["\nBob : Bonjour monsieur\n"], 1, 1)
+        rue.characters["BOB"] = bob
+        receptionniste = Character("Receptionniste", 'un petit gars banal', hotel,
         ["\nRéceptionniste : Je n'ai malheureusement pas de chambre disponible\n"], 1, 0)
         hotel.characters["RECEPTIONNISTE"] = receptionniste
         sherif = Character("Shérif", "Le héro qui protège la ville !", prison,
@@ -288,14 +302,49 @@ saloon, ["\nBarman : Sortez de mon saloon et ne revenez plus jamais !\n"], 1, 0)
         prisonnier = Character("Prisonnier", "Il ne fait pas très peur pour un voyou", prison,
         ["\n@ Vous devez avoir l'autorisation du shérif pour lui parler @\n"], 1, 0)
         prison.characters["PRISONNIER"] = prisonnier
-        a2 = Character("a2", "", kapry, [], 2, 1)
-        kapry.characters["A2"] = a2
-        b2 = Character("b2", "", kapry, [], 2, 1)
-        kapry.characters["B2"] = b2
-        a1 = Character("a1", "", isoloir, [], 1, 1)
-        isoloir.characters["A1"] = a1
-        b1 = Character("b1", "", isoloir, [], 1, 1)
-        isoloir.characters["B1"] = b1
+        cowboy = Character("Cowboy", "Un brave type un peu trop confiant", rue,
+        ["\nCowboy : Heyyyyy !\n",
+        "\nCowboy : Attention monsieur je suis un as de la gâchette !\n"], 1, 1)
+        rue.characters["COWBOY"] = cowboy
+        ivrogne = Character("Ivrogne", "en train de dormir sur le sol", rue,
+        ["\nIvrogne : Rrrrrr\n", "\nIvrogne : Hmmmmm\n"], 1, 0)
+        rue.characters["IVROGNE"] = ivrogne
+        chien = Character("Chien", "un toutou plein d'énergie", prison,
+        ["\nChien : Wouaf !\n", "\nChien : Grrrrr\n"], 1, 1)
+        prison.characters["CHIEN"] = chien
+        pretre = Character("Prêtre", "un gentil monsieur dévoué", chapelle,
+        ["\nPrêtre : Bonjour mon frère\n",
+        "\nPrêtre : Ayez toujours la foi, cela vous aidera\n"], 1, 0)
+        chapelle.characters["PRETRE"] = pretre
+        vendeur = Character("Vendeur", "un jeune homme sympathique", rue,
+        ["\nVendeur : Qui veut un journal ?\n", "\nVendeur : Le journal du jour !\n"], 1, 0)
+        rue.characters["VENDEUR"] = vendeur
+        etranger = Character("Etranger", "Vraisemblablement un mexicain perdu", rue,
+        ["\nÉtranger : Holà !\n"], 1, 1)
+        rue.characters["ETRANGER"] = etranger
+        singe = Character("Singe", "Je pense qu'il s'est trompé de planète", kapry,
+        ["\nSinge : Ouistitiiiii\n"], 2, 1)
+        kapry.characters["SINGE"] = singe
+        krikolo = Character("Krikolo", "Une sorte d'humanoïde un peu fou", tancoeur,
+["\nKrikolo : Oh un nouveau ! Bienvenu sur Tancoeur l'ami !\n",
+ "\nKrikolo : Je suis sûr que vous allez adorer notre lune !\n"], 2, 0)
+        tancoeur.characters["KRIKOLO"] = krikolo
+        combattant = Character("Combattant", "lui me fait très peur", pandora,
+["\nCombattant : Si vous restez trop longtemps je m'occupe de vous\n"], 2, 0)
+        pandora.characters["COMBATTANT"] = combattant
+        touriste = Character("Touriste", "celui-là a l'air aussi perdu que moi", minto,
+        ["\nTouriste : Bonjour !\n", "\nTouriste : Vous ne ressemblez pas au locaux...\n"], 2, 1)
+        minto.characters["TOURISTE"] = touriste
+        carouli = Character("Carouli", "Apparement c'est la star du casino local ", jafar,
+        ["\nCarouli : Une partie ?\n",
+        "\nCarouli : Je n'ai pas encore perdu aujourd'hui !\n"], 2, 0)
+        jafar.characters["CAROULI"] = carouli
+        maximus = Character("Maximus", "Un voyou raté dont tous le monde se moque", sid,
+        ["\nMaximus : Un jour vous me craindrez tous !\n"], 2, 1)
+        sid.characters["MAXIMUS"] = maximus
+        bioman = Character("Bioman", "On se demande ce qu'il fait ici lui", pollux,
+        ["\nBioman : Moitié Homme, moitié Robot !\n"], 2, 0)
+        pollux.characters["BIOMAN"] = bioman
 
         # Setup the dict of all characters
         for r in self.rooms :
