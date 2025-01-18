@@ -13,7 +13,7 @@ class Item:
     Les attributs de la classe sont :
         name : nom de l'objet
         description : une description de l'objet
-        qunaitity : quanitité de l'objet
+        quantity : quanitité de l'objet
         drop_or_not : permet de savoir si on peut jeter l'objet de notre inventaire
 
     Les méthodes de la classe sont : 

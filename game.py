@@ -107,7 +107,7 @@ class Game:
                        Actions.look, 0)
         self.commands["look"] = look
         take = Command("take",
-                       " : prendre un objet dans la pièce",
+                       " <objet> : prendre un objet dans la pièce",
                        Actions.take, 1)
         self.commands["take"] = take
         drop = Command("drop",
@@ -263,7 +263,7 @@ celle-ci est composé de pierres sombres, de montagnes noires et de volcans""", 
         chapelle.inventory["CRUCIFIX"] = crucifix
         pieces = Item("Pieces", "Ça doit être la monnaie sur Jafar", 6)
         jafar.inventory["PIECES"] = pieces
-        totem = Item("TOTEM", "c'est une pièce du trésor du temple", 1)
+        totem = Item("Totem", "c'est une pièce du trésor du temple", 1)
         temple.inventory["TOTEM"] = totem
         cailloux = Item("Cailloux", "Encore des cailloux, sérieusement ??", 2)
         zany.inventory["CAILLOUX"] = cailloux
