@@ -19,6 +19,8 @@ MSG0 = "\nLa commande '{command_word}' ne prend pas de paramètre.\n"
 MSG1 = "\nLa commande '{command_word}' prend 1 seul paramètre.\n"
 # The MSG2 variable is used when the direction doesn't exist.
 MSG2 = "\nLa direction '{direction}' n'existe pas.\n"
+# The MSG3 variable is used especially for drop and take.
+MSG3 = "\nLa commande '{command_word}' prend 1 ou 2 paramètres.\n"
 # The npc_spe dict is for npc with special speeches.
 npc_spe = {'RECEPTIONNISTE' : 1, 'SHERIF' : 2, 'EXTRATERRESTRE' : 1, 'GARDIEN' : 2, 'BAKOU' : 2, 'JARJARBINKS' : 3}
 class Actions:
@@ -83,18 +85,11 @@ class Actions:
             player.move(direction)
 
             ### La seconde partie du code permet au pnjs de bouger de façon aléatoire ###
-            #print(game.all_characters) #test
             for char in game.all_characters :
                 ach = game.all_characters[char]
                 # print(r.characters) # test
                 if ach.move_or_not == 1 :
-                    # print("Voilà : ", char, "et", type(char)) # test
-                    temp = ach.current_room
                     ach.move()
-                    if temp != ach.current_room :
-                        del temp.characters[char]
-                        ach.current_room.characters[char] = ach
-                #print(char, ":",ach.current_room.name) # test pour voir si les PNJs bougent
         else :
             print(MSG2.format(direction=list_of_words[1]))
         return True
@@ -185,7 +180,7 @@ class Actions:
 #------------------------------------
     
     @staticmethod
-    def inventory(game, list_of_words, number_of_parameters):
+    def direction(game, list_of_words, number_of_parameters):
         l = len(list_of_words)
         # If the number of parameters is incorrect, print an error message and return False.
         if l != number_of_parameters + 1:
@@ -194,7 +189,7 @@ class Actions:
             return False
         
         player = game.player
-        print(player.get_inventory())
+        print(player.current_room.get_long_description())
         return True
 
 #------------------------------------
@@ -251,7 +246,7 @@ class Actions:
             return False
         
         player = game.player
-        print(player.current_room.get_long_description())
+        #print(player.current_room.get_long_description())
         print(player.current_room.get_inventory())
             
 #------------------------------------
@@ -263,19 +258,22 @@ class Actions:
             command_word = list_of_words[0]
             print(MSG1.format(command_word=command_word))
             return False
+
         player = game.player
         table_remplacement = str.maketrans("ÉÈÀÙÇÊË","EEAUCEE")
         obj_recherche = list_of_words[1].upper().translate(table_remplacement).strip()
         #print(obj_recherche) # test
         if obj_recherche in player.current_room.inventory :
-            player.inventory[obj_recherche] = player.current_room.inventory[obj_recherche]
+            if obj_recherche not in game.player.inventory.keys() :
+                player.inventory[obj_recherche] = player.current_room.inventory[obj_recherche]
+            elif obj_recherche in game.player.inventory.keys() :
+                player.inventory[obj_recherche].quantity += 1
             print(player.inventory[obj_recherche].name.capitalize(),"est maintenant bien au chaud dans ton inventaire.")
             del player.current_room.inventory[obj_recherche]
-            #print(player.inventory)
-            return player.inventory
+            return True
         else :
             print(list_of_words[1].capitalize() ,"n'est pas dans la pièce.")
-        return None
+        return False
 
 #------------------------------------
 

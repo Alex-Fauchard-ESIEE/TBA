@@ -1,16 +1,18 @@
 import random
 class Character():
 
-    def __init__(self, name, description, current_room, msgs, move_or_not):
+    def __init__(self, name, description, current_room, msgs, zone, move_or_not):
         '''
-        move_or_not : peut bouger si il vaut 1
+        move_or_not : peut bouger s'il vaut 1
+        zone : 1 ou 2 selon l'endroit ou le pnj peut se déplacer
         '''
         self.name = name
         self.description = description
         self.current_room = current_room
         self.msgs = msgs
-        self.bag = {}
+        self.zone = zone
         self.move_or_not = move_or_not
+        self.bag = {}
 
 #------------------------------------
 
@@ -22,11 +24,16 @@ class Character():
     def move(self):
         l = [0,1]
         n = random.choice(l)
+        temp = self.current_room
         if n == 1 :
             exits_adj = [value for value in list(self.current_room.exits.values()) if value != None]
             piece_adj = random.choice(exits_adj)
-            self.current_room = piece_adj
-            return True
+            if self.zone == piece_adj.zone :
+                self.current_room = piece_adj
+                #print(f"{self.name} avant : {temp.name} avec {temp.characters} et après : {self.current_room.name} avec {self.current_room.characters} ")
+                self.current_room.characters[self.name.upper()] = temp.characters[self.name.upper()]
+                del temp.characters[self.name.upper()]
+                return True
         else :
             return False
 

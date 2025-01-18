@@ -49,12 +49,13 @@ class Room:
 #------------------------------------
 
     # Define the constructor. 
-    def __init__(self, name, description, talk = 0):
+    def __init__(self, name, description, zone,talk = 0):
         self.name = name
         self.description = description
         self.exits = {}
         self.inventory = {}
         self.characters = {}
+        self.zone = zone
         self.talk = talk
      
 #------------------------------------

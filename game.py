@@ -9,8 +9,7 @@ from command import Command
 from actions import Actions
 from item import Item
 from character import Character
-from lines import get_lines, vie, collier, tp
-
+from lines import get_lines, depart, vie, collier, tp
 
 
 class Game:
@@ -43,13 +42,13 @@ class Game:
         self.commands["history"] = history
         back = Command("back", " : retourner au lieu précédent, si cela est possible", Actions.back, 0)
         self.commands["back"] = back
-        inventory = Command("inventory", " : regarder le contenu de son inventaire", Actions.inventory, 0)
-        self.commands["inventory"] = inventory
+        direction = Command("direction", " : donne votre position et les sorties possibles", Actions.direction, 0)
+        self.commands["direction"] = direction
         look = Command("look", " : chercher des objets et des personnes dans la pièce", Actions.look, 0)
         self.commands["look"] = look
         take = Command("take", " : prendre un objet dans la pièce", Actions.take, 1)
         self.commands["take"] = take
-        drop = Command("drop", " : lâcher un objet de son inventaire", Actions.drop, 1)
+        drop = Command("drop", " <objet> : lâcher un objet de son inventaire", Actions.drop, 1)
         self.commands["drop"] = drop
         check = Command("check", " : jeter un oeil à son inventaire", Actions.check, 0)
         self.commands["check"] = check
@@ -58,54 +57,54 @@ class Game:
 
         # Setup rooms
 
-        rue = Room("Rue principale", "Je suis dans une véritable rue de western avec ses chevaux, ses cowboys et ses douilles au sol.")
+        rue = Room("Rue principale", "Je suis dans une véritable rue de western avec ses chevaux, ses cowboys et ses douilles au sol.", 1)
         self.rooms.append(rue)
-        saloon = Room("Saloon", "Ce bon vieux saloon ne m'est plus accessible car le gérant m'a viré.")
+        saloon = Room("Saloon", "Ce bon vieux saloon ne m'est plus accessible car le gérant m'a viré.", 1)
         self.rooms.append(saloon)
-        prison = Room("Bureau du shérif", "Le shérif est toujours là, histoire de veiller sur cette charmante petite ville.")
+        prison = Room("Bureau du shérif", "Le shérif est toujours là, histoire de veiller sur cette charmante petite ville.", 1)
         self.rooms.append(prison)
-        chapelle = Room("Chapelle", "La chappelle est calme, je vois un hôtel au fond et un confessionnal à ma gauche.", 1)
+        chapelle = Room("Chapelle", "La chappelle est calme, je vois un hôtel au fond et un confessionnal à ma gauche.", 1, 1)
         self.rooms.append(chapelle)
-        hotel = Room("Hotel", "Je suis dans l'entrée de l'hôtel, un réceptionniste me fait face derrière le comptoir et je vois un escalier au fond.")
+        hotel = Room("Hotel", "Je suis dans l'entrée de l'hôtel, un réceptionniste me fait face derrière le comptoir et je vois un escalier au fond.", 1)
         self.rooms.append(hotel)
-        etage = Room("Étage", "Dans ce couloir mal éclairé, il y a 3 chambres, et de multiples objets au sol.")
+        etage = Room("Étage", "Dans ce couloir mal éclairé, il y a 3 chambres, et de multiples objets au sol.", 1)
         self.rooms.append(etage)
-        chambre1 = Room("Chambre 1", "Une chambre tout à fait banal, avec une petite fenêtre donnant sur la rue principale")
+        chambre1 = Room("Chambre 1", "Une chambre tout à fait banal, avec une petite fenêtre donnant sur la rue principale", 1)
         self.rooms.append(chambre1)
-        chambre2 = Room("Chambre 2", "Cette chambre vient vraisemblablement d'être quittée en vitesse, il reste encore de nombreux objets un peu partout.")
+        chambre2 = Room("Chambre 2", "Cette chambre vient vraisemblablement d'être quittée en vitesse, il reste encore de nombreux objets un peu partout.", 1)
         self.rooms.append(chambre2)
-        chambre3 = Room("Chambre 3", "Ça ne ressemble plus vraiment à une chambre, mais plutôt un débarras tellement il y a de choses ici.")
+        chambre3 = Room("Chambre 3", "Ça ne ressemble plus vraiment à une chambre, mais plutôt un débarras tellement il y a de choses ici.", 1)
         self.rooms.append(chambre3)
-        zany = Room("Zany", "Cette lune me semble assez austère, elle ressemble un peu au désert que je connais bien.")
+        zany = Room("Zany", "Cette lune me semble assez austère, elle ressemble un peu au désert que je connais bien.", 2)
         self.rooms.append(zany)
-        litchie = Room("Litchie", "Je suis entouré de végétation largement plus grande que moi, au point que je ne vois déjà presque plus mon vaisseau après quelques mètres. Mais il y a des traces de vie autour de moi.")
+        litchie = Room("Litchie", "Je suis entouré de végétation largement plus grande que moi, au point que je ne vois déjà presque plus mon vaisseau après quelques mètres. Mais il y a des traces de vie autour de moi.", 2)
         self.rooms.append(litchie)
-        kapry = Room("Kapry", "Ici la fête est partout et les kapryens sont déchaînés, je ne sais pas si je vais rester longtemps. À moins qu'il n'y ait un petit marché pas loin !")
+        kapry = Room("Kapry", "Ici la fête est partout et les kapryens sont déchaînés, je ne sais pas si je vais rester longtemps. À moins qu'il n'y ait un petit marché pas loin !", 2)
         self.rooms.append(kapry)
-        temple = Room("Temple", "Cet endroit est majestueux et semble cacher de nombreux trésors !")
+        temple = Room("Temple", "Cet endroit est majestueux et semble cacher de nombreux trésors !", 2)
         self.rooms.append(temple)
-        pandora = Room("Pandora", "Cette planète peuplée d'humanoide me terrifie, elle est surprenante de par ses constructions originales et son ciel obscur. ")
+        pandora = Room("Pandora", "Cette planète peuplée d'humanoide me terrifie, elle est surprenante de par ses constructions originales et son ciel obscur.", 2)
         self.rooms.append(pandora)
-        jafar = Room("Jafar", 'Cette planète a un paysage plutôt désertique avec de vastes étendue de dunes de sables, on peut apercevoir une grande \nville luxueuse appelée "Casino Land"', 1)
+        jafar = Room("Jafar", 'Cette planète a un paysage plutôt désertique avec de vastes étendue de dunes de sables, on peut apercevoir une grande \nville luxueuse appelée "Casino Land"', 2, 1)
         self.rooms.append(jafar)
-        minto = Room("Minto", "Ici prospère un calme absolu, le seul bruit que j'entend est celui des vagues qui s'échoue sur cette petite île paradisiaque entourée d'eau, tout comme le reste de la planète ", 0)
+        minto = Room("Minto", "Ici prospère un calme absolu, le seul bruit que j'entend est celui des vagues qui s'échoue sur cette petite île paradisiaque entourée d'eau, tout comme le reste de la planète ", 2, 1)
         self.rooms.append(minto)
-        pollux = Room("Pollux", "Une lune des plus déconcertante chacun de mes pas est un supplice dû aux poils longs et marrons se trouvant sur le sol, ces poils proviennent des nuages")
+        pollux = Room("Pollux", "Une lune des plus déconcertante chacun de mes pas est un supplice dû aux poils longs et marrons se trouvant sur le sol, ces poils proviennent des nuages", 2)
         self.rooms.append(pollux)
-        sid = Room("Sid", "Le paysage de cette lune est celui de vastes plaines vertes et de plantes, néanmoins l'air de l'atmosphère insufflé après chaque respiration me donne envie de dormir, mais je dois lutter pour rejoindre le fameux temple sacré des dormeurs.")
+        sid = Room("Sid", "Le paysage de cette lune est celui de vastes plaines vertes et de plantes, néanmoins l'air de l'atmosphère insufflé après chaque respiration me donne envie de dormir, mais je dois lutter pour rejoindre le fameux temple sacré des dormeurs.", 2)
         self.rooms.append(sid)
-        tancoeur = Room("Tancoeur","Cette planète semble refusé ma présence, moi qui suit allergique à la désolation, celle-ci est composé de pierres sombres, de montagnes noires et de volcans en activités.")
+        tancoeur = Room("Tancoeur","Cette planète semble refusé ma présence, moi qui suit allergique à la désolation, celle-ci est composé de pierres sombres, de montagnes noires et de volcans en activités.", 2)
         self.rooms.append(tancoeur)
-        isoloir = Room("Isoloir", "Petite pièce de la chapelle servant normalement à se recueillir", 1)
+        isoloir = Room("Isoloir", "Petite pièce de la chapelle servant normalement à se recueillir", 1, 1)
         self.rooms.append(isoloir)
 
         # Create exits for rooms
 
-        rue.exits = {"N" : saloon, "E" : hotel, "S" : chapelle, "O" : prison, "U" : None, "D" : None}
+        rue.exits = {"N" : saloon, "E" : hotel, "S" : None, "O" : prison, "U" : None, "D" : None}
         saloon.exits = {"N" : None, "E" : None, "S" : rue, "O" : None, "U" : None, "D" : None}
         prison.exits = {"N" : None, "E" : rue, "S" : None, "O" : None, "U" : None, "D" : None}
         chapelle.exits = {"N" : rue, "E" : None, "S" : None, "O" : isoloir, "U" : None, "D" : None}
-        hotel.exits = {"N" : None, "E" : None, "S" : None, "O" : rue, "U" : etage, "D" : None}
+        hotel.exits = {"N" : None, "E" : None, "S" : None, "O" : None, "U" : None, "D" : None} # Le passage vers le rue (O) est bloqué au début
         etage.exits = {"N" : chambre1, "E" : chambre2, "S" : chambre3, "O" : None, "U" : None, "D" : hotel}
         chambre1.exits = {"N" : None, "E" : None, "S" : etage, "O" : None, "U" : None, "D" : None}
         chambre2.exits = {"N" : None, "E" : None, "S" : None, "O" : etage, "U" : None, "D" : None}
@@ -113,7 +112,7 @@ class Game:
         zany.exits = {"N" : None, "E" : None, "S" : None, "O" : None, "U" : None, "D" : minto}
         litchie.exits = {"N" : None, "E" : None, "S" : None, "O" : None, "U" : minto, "D" : None}
         minto.exits = {"N" : None, "E" : kapry, "S" : None, "O" : jafar, "U" : zany, "D" : litchie}
-        kapry.exits = {"N" : None, "E" : pandora, "S" : temple, "O" : minto, "U" : None, "D" : None}
+        kapry.exits = {"N" : None, "E" : None, "S" : temple, "O" : None, "U" : None, "D" : None}
         temple.exits = {"N" : kapry, "E" : None, "S" : None, "O" : None, "U" : None, "D" : None}
         jafar.exits = {"N" : None, "E" : None, "S" : None, "O" : pandora , "U" : pollux, "D" : sid}
         tancoeur.exits = {"N" : None, "E" : None, "S" : None, "O" : None, "U" : None, "D" : pandora}
@@ -133,8 +132,12 @@ class Game:
         hotel.inventory["EPEE"] = EPEE
         PERLE = Item("Perle", "C'est un morceau du collier que j'avais offert à Bonnie lors de notre rencontre", 1, 0)
         chambre1.inventory["PERLE"] = PERLE
-        # MAILLON = Item("Maillon", "C'est un maillon en or, un morceau du collier que j'avais offert à Bonnie lors de notre rencontre", 1)
-        # sherif.inventory["Maillon"] = MAILLON
+        CAILLOU = Item("Caillou", "", 1)
+        hotel.inventory["CAILLOU"] = CAILLOU
+        CAILLOU = Item("Caillou", "", 1)
+        chambre2.inventory["CAILLOU"] = CAILLOU
+        CAILLOU = Item("Caillou", "", 1)
+        chambre3.inventory["CAILLOU"] = CAILLOU
         # MAILLON = Item("Perle", "C'est un maillon en argent, un morceau du collier que j'avais offert à Bonnie lors de notre rencontre", 1)
         # minto.inventory["Maillon"] = MAILLON
         # PERLE = Item("Perle", "C'est encore un morceau du collier que j'avais offert à Bonnie", 1)
@@ -143,59 +146,55 @@ class Game:
         # jafar.inventory["PENDENTIF"] = PENDENTIF
 
         # Setup PNJs for rooms 
-        # Setup the dict of all characters
-        # Le dernier paramètre est pour savoir si le personnage peut changer de pièce ( 0 -> immobile)
 
-        GANDALF = Character("Gandalf", "un magicien blanc", rue, ["Abracadabra !", "Bizzzzz"], 1)
+        GANDALF = Character("Gandalf", "un magicien blanc", rue, ["Abracadabra !", "Bizzzzz"], 1, 1)
         rue.characters["GANDALF"] = GANDALF
-        PATATE = Character("Patate", "une magnifique patate", rue, [], 0)
+        PATATE = Character("Patate", "une magnifique patate", rue, [], 1, 0)
         rue.characters["PATATE"] = PATATE
-        BOB = Character("Bob", "simplement une éponge", prison, ["Patriiiiiick"], 1)
+        BOB = Character("Bob", "simplement une éponge", prison, ["Patriiiiiick"], 1, 1)
         prison.characters["BOB"] = BOB
-        RECEPTIONNISTE = Character("Réceptionniste", 'un petit gars banal', hotel, ["Je n'ai malheureusement pas de chambre disponible"], 0)
+        RECEPTIONNISTE = Character("Réceptionniste", 'un petit gars banal', hotel, ["Je n'ai malheureusement pas de chambre disponible"], 1, 0)
         hotel.characters["RECEPTIONNISTE"] = RECEPTIONNISTE
-        SHERIF = Character("Shérif", "Le héro qui protège la ville !", prison, ["Je n'ai aucun travail pour vous monsieur"], 0)
+        SHERIF = Character("Shérif", "Le héro qui protège la ville !", prison, ["Je n'ai aucun travail pour vous monsieur"], 1, 0)
         prison.characters["SHERIF"] = SHERIF
-        EXTRATERRESTRE = Character("Extraterrestre", "Une créature un peu bizarre mais dont je comprends la langue", kapry, ["..."], 0)
+        EXTRATERRESTRE = Character("Extraterrestre", "Une créature un peu bizarre mais dont je comprends la langue", kapry, ["..."], 2, 0)
         kapry.characters["EXTRATERRESTRE"] = EXTRATERRESTRE
-        GARDIEN = Character("Gardien", "Ce personnage est intimand mais amical", temple, ["Vous ne devriez pas rester ici monsieur"], 0)       
+        GARDIEN = Character("Gardien", "Ce personnage est intimand mais amical", temple, ["Vous ne devriez pas rester ici monsieur"], 2, 0)       
         temple.characters["GARDIEN"] = GARDIEN
-        BAKOU = Character("Bakou", "Ce gorille semble être le chef de la tribu, mais il ne parle pas ma langue donc je n'en suis pas sûr", minto, ["..."], 0)
+        BAKOU = Character("Bakou", "Ce gorille semble être le chef de la tribu, mais il ne parle pas ma langue donc je n'en suis pas sûr", minto, ["..."], 2, 0)
         minto.characters["BAKOU"] = BAKOU
-        JARJARBINKS = Character("JarJarBinks", "Cette drôle de créature semble tout droit sortie d'un film !", jafar, ["Meesa s'appelle JarJarBinks"], 0)
+        JARJARBINKS = Character("JarJarBinks", "Cette drôle de créature semble tout droit sortie d'un film !", jafar, ["Meesa s'appelle JarJarBinks"], 2, 0)
         jafar.characters["JARJARBINKS"] = JARJARBINKS
+        BARMAN = Character("Barman", "Ce monsieur n'a pas l'air de beaucoup m'apprécié", saloon, ["Sortez de mon saloon, vous allez me créer encore plus de problème que la nuit dernière !"], 1, 0)
+        saloon.characters["BARMAN"] = BARMAN
+        PRISONNIER = Character("Prisonnier", "Il ne fait pas très peur pour un voyou", prison, ["@ Vous devez avoir l'autorisation du shérif pour lui parler @"], 1, 0)
+        prison.characters["PRISONNIER"] = PRISONNIER
+        A2 = Character("a2", "", kapry, [], 2, 1)
+        kapry.characters["A2"] = A2
+        B2 = Character("b2", "", kapry, [], 2, 1)
+        kapry.characters["B2"] = B2
+        C2 = Character("c2", "", kapry, [], 2, 1)
+        kapry.characters["C2"] = C2
+        A1 = Character("a1", "", isoloir, [], 1, 1)
+        isoloir.characters["A1"] = A1
+        B1 = Character("b1", "", isoloir, [], 1, 1)
+        isoloir.characters["B1"] = B1
+        C1 = Character("c1", "", isoloir, [], 1, 1)
+        isoloir.characters["C1"] = C1
+
+        # Setup the dict of all characters
 
         for r in self.rooms :
             for char in r.characters :
                 self.all_characters[char] = r.characters[char]
         
-        # Setup inventories for PNJs
-        """
-        # 1
-        MAILLON = Item("Maillon", "C'est un maillon en or, un morceau du collier que j'avais offert à Bonnie lors de notre rencontre", 1)
-        SHERIF.bag["Maillon"] = MAILLON
-        # 3
-        MAILLON = Item("Perle", "C'est un maillon en argent, un morceau du collier que j'avais offert à Bonnie lors de notre rencontre", 1)
-        BAKOU.bag["Maillon"] = MAILLON
-        # 2
-        PERLE = Item("Perle", "C'est encore un morceau du collier que j'avais offert à Bonnie", 1)
-        EXTRATERRESTRE.bag["PERLE"] = PERLE
-        #4
-        PENDENTIF = Item("Pendentif", "Et voilà la denrière pièce pour reconstituer le collier !", 1)
-        JARJARBINKS.bag["PENDENTIF"] = PENDENTIF
-        """
         # Setup player and starting room
 
         self.player = Player(input("\nEntrez votre nom: "))
         Player.name = self.player
-        #exits = [value.name for value in list(rue.exits.values()) if value != None] # test
-        #print(exits) # test
-        #a = list(rue.exits.values()) # test
-        #print(a, a[1].name, type(a[1])) # test
         self.player.current_room = hotel
         self.player.inventory = {}
         self.player.character = {}
-
 
     # Beginning of history
 
@@ -207,27 +206,32 @@ class Game:
         while not self.finished:
             # Get the command from the player
             self.process_command(input("> "))
-            #print(self.rooms[6] ,",", self.player.current_room) test
-            print("collier :", collier, "\ntp :", tp)
             if sum(collier) == 1 :
                 MAILLON = Item("Maillon", "C'est un maillon en or, un morceau du collier que j'avais offert à Bonnie lors de notre rencontre", 1, 0)
                 self.player.inventory["MAILLON"] = MAILLON
-                print("@ Vous avez reçu un objet @\n")
+                print("@ Vous avez reçu un objet @")
+                self.rooms[0].exits["S"] = self.rooms[3]
+                print("\n@ La porte de la chapelle est maintenant ouverte @\n")
                 collier.append(1)
             elif sum(collier) == 14 :
                 PIERRE = Item("Pierre", "C'est encore un morceau du collier que j'avais offert à Bonnie", 1, 0)
                 self.player.inventory["PIERRE"] = PIERRE
                 print("ORATEUR @ Vous avez reçu un objet @\n")
+                self.rooms[11].exits["O"] = self.rooms[15]
+                self.rooms[11].exits["E"] = self.rooms[13]
+                print("\n@ Pandora et Minto sont désormais accessibles @\n")
                 collier.append(1)
-            elif sum(collier) == 51 :
+            elif sum(collier) == 52 :
                 CHAINE = Item("Chaîne", "C'est un maillon en argent, un morceau du collier que j'avais offert à Bonnie lors de notre rencontre", 1, 0)
                 self.player.inventory["CHAINE"] = CHAINE
                 print("@ Vous avez reçu un objet @\n")
+                self.rooms[15].exits["O"] = self.rooms[14]
+                print("\n@ Vous pouvez maintenant visiter Jafar ! @\n")
                 collier.append(1)
-            elif sum(collier) == 152 :
-                PENDENTIF = Item("Pendentif", "Et voilà la denrière pièce pour reconstituer le collier !", 1, 0)
+            elif sum(collier) == 154 :
+                PENDENTIF = Item("Pendentif", "Et voilà la dernière pièce pour reconstituer le collier !", 1, 0)
                 self.player.inventory["PENDENTIF"] = PENDENTIF
-                print("@ Vous avez reçu un objet @\n")
+                print("@ Vous avez reçu le dernier morceau du collier de Bonny @\n")
                 get_lines('fin', 0)
                 self.finished = True
             if len(vie) != 0 : 
@@ -235,11 +239,14 @@ class Game:
             if self.player.current_room == self.rooms[6] and self.gin == 1 :
                 get_lines('Perle', 0)
                 self.gin = 0
-            if self.player.current_room == self.rooms[6] and self.ivre == 1 and "Perle" in self.player.inventory :
+            if self.player.current_room == self.rooms[6] and self.ivre == 1 and "PERLE" in self.player.inventory :
                 get_lines('Bar', 0)
-                self.player.current_room = self.rue
+                self.player.current_room = self.rooms[0]
                 self.ivre = 0
                 print(self.player.current_room.get_long_description())
+                print("@ Vous n'avez plus accès au salon à cause de votre comportement @\n")
+                self.rooms[0].exits["N"] = None
+                self.rooms[4].exits["O"] = self.rooms[0]
             if self.player.current_room.talk == 1 :
                 get_lines(self.player.current_room.name, 0)
                 self.player.current_room.talk = 0
@@ -247,6 +254,10 @@ class Game:
                     self.player.current_room = self.rooms[11]
                     print(self.player.current_room.get_long_description())
                     tp.remove(1)
+            if sum(depart) == 1 and sum(vie) == 0 :
+                self.rooms[4].exits["U"] = self.rooms[5]
+                print("\n@ Vous pouvez maintenant aller à l'étage ! @\n")
+                depart.remove(1)
         return None
 
     # Process the command entered by the player
@@ -276,7 +287,6 @@ class Game:
 def main():
     # Create a game object and play the game
     Game().play()
-
 
 if __name__ == "__main__":
     main()
