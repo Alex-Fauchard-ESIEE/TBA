@@ -73,7 +73,7 @@ class Game:
         self.rooms.append(chambre1)
         chambre2 = Room("Chambre 2", "Cette chambre vient vraisemblablement d'être quittée en vitesse, il reste encore de nombreux objets un peu partout.", 1)
         self.rooms.append(chambre2)
-        chambre3 = Room("Chambre 3", "Ça ne ressemble plus vraiment à une chambre, mais plutôt un débarras tellement il y a de choses ici.", 1)
+        chambre3 = Room("Chambre 3", "Ça ne ressemble plus vraiment à une chambre mais plutôt un débarras tellement il y a de choses ici.", 1)
         self.rooms.append(chambre3)
         zany = Room("Zany", "Cette lune me semble assez austère, elle ressemble un peu au désert que je connais bien.", 2)
         self.rooms.append(zany)
@@ -147,27 +147,27 @@ class Game:
 
         # Setup PNJs for rooms 
 
-        GANDALF = Character("Gandalf", "un magicien blanc", rue, ["Abracadabra !", "Bizzzzz"], 1, 1)
+        GANDALF = Character("Gandalf", "un magicien blanc", rue, ["\n Gandalf : Abracadabra !\n", "\n Gandalf : Bizzzzz\n"], 1, 1)
         rue.characters["GANDALF"] = GANDALF
-        PATATE = Character("Patate", "une magnifique patate", rue, [], 1, 0)
+        PATATE = Character("Patate", "\n Patate : une magnifique patate", rue, [], 1, 0)
         rue.characters["PATATE"] = PATATE
-        BOB = Character("Bob", "simplement une éponge", prison, ["Patriiiiiick"], 1, 1)
+        BOB = Character("Bob", "simplement une éponge", prison, ["\nBob : Patriiiiiick\n"], 1, 1)
         prison.characters["BOB"] = BOB
-        RECEPTIONNISTE = Character("Réceptionniste", 'un petit gars banal', hotel, ["Je n'ai malheureusement pas de chambre disponible"], 1, 0)
+        RECEPTIONNISTE = Character("Réceptionniste", 'un petit gars banal', hotel, ["\nRéceptionniste : Je n'ai malheureusement pas de chambre disponible\n"], 1, 0)
         hotel.characters["RECEPTIONNISTE"] = RECEPTIONNISTE
-        SHERIF = Character("Shérif", "Le héro qui protège la ville !", prison, ["Je n'ai aucun travail pour vous monsieur"], 1, 0)
+        SHERIF = Character("Shérif", "Le héro qui protège la ville !", prison, ["\n Shérif : Je n'ai aucun travail pour vous monsieur\n"], 1, 0)
         prison.characters["SHERIF"] = SHERIF
-        EXTRATERRESTRE = Character("Extraterrestre", "Une créature un peu bizarre mais dont je comprends la langue", kapry, ["..."], 2, 0)
+        EXTRATERRESTRE = Character("Extraterrestre", "Une créature un peu bizarre mais dont je comprends la langue", kapry, ["\nExtraterrestre : ...\n"], 2, 0)
         kapry.characters["EXTRATERRESTRE"] = EXTRATERRESTRE
-        GARDIEN = Character("Gardien", "Ce personnage est intimand mais amical", temple, ["Vous ne devriez pas rester ici monsieur"], 2, 0)       
+        GARDIEN = Character("Gardien", "Ce personnage est intimand mais amical", temple, ["\nGardien : Vous ne devriez pas rester ici monsieur\n"], 2, 0)       
         temple.characters["GARDIEN"] = GARDIEN
-        BAKOU = Character("Bakou", "Ce gorille semble être le chef de la tribu, mais il ne parle pas ma langue donc je n'en suis pas sûr", minto, ["..."], 2, 0)
+        BAKOU = Character("Bakou", "Ce gorille semble être le chef de la tribu, mais il ne parle pas ma langue donc je n'en suis pas sûr", minto, ["\nBakou : ...\n"], 2, 0)
         minto.characters["BAKOU"] = BAKOU
-        JARJARBINKS = Character("JarJarBinks", "Cette drôle de créature semble tout droit sortie d'un film !", jafar, ["Meesa s'appelle JarJarBinks"], 2, 0)
+        JARJARBINKS = Character("JarJarBinks", "Cette drôle de créature semble tout droit sortie d'un film !", jafar, ["\nJarJarBinks : Meesa s'appelle JarJarBinks\n"], 2, 0)
         jafar.characters["JARJARBINKS"] = JARJARBINKS
-        BARMAN = Character("Barman", "Ce monsieur n'a pas l'air de beaucoup m'apprécié", saloon, ["Sortez de mon saloon, vous allez me créer encore plus de problème que la nuit dernière !"], 1, 0)
+        BARMAN = Character("Barman", "Ce monsieur n'a pas l'air de beaucoup m'apprécié", saloon, ["\nBarman : Sortez de mon saloon, vous allez me créer encore plus de problème que la nuit dernière !\n"], 1, 0)
         saloon.characters["BARMAN"] = BARMAN
-        PRISONNIER = Character("Prisonnier", "Il ne fait pas très peur pour un voyou", prison, ["@ Vous devez avoir l'autorisation du shérif pour lui parler @"], 1, 0)
+        PRISONNIER = Character("Prisonnier", "Il ne fait pas très peur pour un voyou", prison, ["\n@ Vous devez avoir l'autorisation du shérif pour lui parler @\n"], 1, 0)
         prison.characters["PRISONNIER"] = PRISONNIER
         A2 = Character("a2", "", kapry, [], 2, 1)
         kapry.characters["A2"] = A2
@@ -209,29 +209,29 @@ class Game:
             if sum(collier) == 1 :
                 MAILLON = Item("Maillon", "C'est un maillon en or, un morceau du collier que j'avais offert à Bonnie lors de notre rencontre", 1, 0)
                 self.player.inventory["MAILLON"] = MAILLON
-                print("@ Vous avez reçu un objet @")
+                print("\n@ Vous avez reçu un objet @\n")
                 self.rooms[0].exits["S"] = self.rooms[3]
-                print("\n@ La porte de la chapelle est maintenant ouverte @\n")
+                print("@ La porte de la chapelle est maintenant ouverte @\n")
                 collier.append(1)
             elif sum(collier) == 14 :
                 PIERRE = Item("Pierre", "C'est encore un morceau du collier que j'avais offert à Bonnie", 1, 0)
                 self.player.inventory["PIERRE"] = PIERRE
-                print("ORATEUR @ Vous avez reçu un objet @\n")
+                print("\n@ Vous avez reçu un objet @\n")
                 self.rooms[11].exits["O"] = self.rooms[15]
                 self.rooms[11].exits["E"] = self.rooms[13]
-                print("\n@ Pandora et Minto sont désormais accessibles @\n")
+                print("@ Pandora et Minto sont désormais accessibles @\n")
                 collier.append(1)
             elif sum(collier) == 52 :
                 CHAINE = Item("Chaîne", "C'est un maillon en argent, un morceau du collier que j'avais offert à Bonnie lors de notre rencontre", 1, 0)
                 self.player.inventory["CHAINE"] = CHAINE
                 print("@ Vous avez reçu un objet @\n")
                 self.rooms[15].exits["O"] = self.rooms[14]
-                print("\n@ Vous pouvez maintenant visiter Jafar ! @\n")
+                print("@ Vous pouvez maintenant visiter Jafar ! @\n")
                 collier.append(1)
             elif sum(collier) == 154 :
                 PENDENTIF = Item("Pendentif", "Et voilà la dernière pièce pour reconstituer le collier !", 1, 0)
                 self.player.inventory["PENDENTIF"] = PENDENTIF
-                print("@ Vous avez reçu le dernier morceau du collier de Bonny @\n")
+                print("\n@ Vous avez reçu le dernier morceau du collier de Bonny @\n")
                 get_lines('fin', 0)
                 self.finished = True
             if len(vie) != 0 : 
@@ -244,7 +244,7 @@ class Game:
                 self.player.current_room = self.rooms[0]
                 self.ivre = 0
                 print(self.player.current_room.get_long_description())
-                print("@ Vous n'avez plus accès au salon à cause de votre comportement @\n")
+                print("\n@ Vous n'avez plus accès au salon à cause de votre comportement @\n")
                 self.rooms[0].exits["N"] = None
                 self.rooms[4].exits["O"] = self.rooms[0]
             if self.player.current_room.talk == 1 :

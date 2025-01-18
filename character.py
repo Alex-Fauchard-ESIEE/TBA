@@ -48,10 +48,11 @@ class Character():
         #elif self.msgs == []  :
             #return f"{self.name} n'a plus rien à vous dire..."
         elif self.msgs == [] :
-            return f"{self.name} n'a vraisemblablement rien à vous dire..."
+            return f"\n{self.name} n'a vraisemblablement rien à vous dire...\n"
         else :
             return False
 
+#------------------------------------
     
     def give(game, self) :
             if self.bag == [] :

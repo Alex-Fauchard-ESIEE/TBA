@@ -43,7 +43,7 @@ class Player():
 #------------------------------------
     # Define get_history
     def get_history(self):
-        history = "\nVous avez déjà visité les pièces suivantes:\n"
+        history = "\nVous avez déjà visité les pièces suivantes :\n"
         if self.history == [] :
             return ''
         else :

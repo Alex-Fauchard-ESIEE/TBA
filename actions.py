@@ -268,11 +268,11 @@ class Actions:
                 player.inventory[obj_recherche] = player.current_room.inventory[obj_recherche]
             elif obj_recherche in game.player.inventory.keys() :
                 player.inventory[obj_recherche].quantity += 1
-            print(player.inventory[obj_recherche].name.capitalize(),"est maintenant bien au chaud dans ton inventaire.")
+            print(f"\n{player.inventory[obj_recherche].name.capitalize()} est maintenant bien au chaud dans ton inventaire.\n")
             del player.current_room.inventory[obj_recherche]
             return True
         else :
-            print(list_of_words[1].capitalize() ,"n'est pas dans la pièce.")
+            print(f"\n{list_of_words[1].capitalize()} n'est pas dans la pièce.\n")
         return False
 
 #------------------------------------
@@ -291,15 +291,15 @@ class Actions:
         obj_recherche = list_of_words[1].upper().translate(table_remplacement).strip()
         if obj_recherche in player.inventory :
             if player.inventory[obj_recherche].drop_or_not == 0 :
-                print("Tu ne vas quand même pas jeter ce souvenir...")
+                print("\nTu ne vas quand même pas jeter ce souvenir...\n")
                 return True
             else :
                 player.current_room.inventory[obj_recherche] = player.inventory[obj_recherche]
-                print(player.inventory[obj_recherche].name.capitalize(),"est maintenant sur le sol froid.")
+                print(f"\n{player.inventory[obj_recherche].name.capitalize()} est maintenant sur le sol froid.\n")
                 del player.inventory[obj_recherche]
                 return True
         else :
-            print(list_of_words[1].capitalize() ," n'est pas dans ton inventaire.")
+            print(f"\n{list_of_words[1].capitalize()} n'est pas dans ton inventaire.\n")
         return False
 
 #------------------------------------
@@ -335,7 +335,7 @@ class Actions:
             print(player.current_room.characters[character_recherche].get_msg())
             return True
         else :
-            print("Hmmmm personne ici ne s'appelle comme ça")
+            print("\nHmmmm personne ici ne s'appelle comme ça\n")
             return False
 
 #------------------------------------
